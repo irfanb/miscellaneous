@@ -1,8 +1,16 @@
-JAVARUNTIME=/usr/local/jdk1.2.2/bin/java
+JAVARUNTIME=/usr/bin/java
 SAXONJAR=~/java/saxon/saxon.jar
+SAXONJAR=./saxon6-5-5.jar
+
+SAXONJAR=./saxon-9.1.0.8.jar 
+SAXONJAR=./Saxon-HE-9.8.0-4.jar
+SAXONJAR=./Saxon-HE-9.7.0-20.jar
+
 
 %.html : %.xml
-	$(JAVARUNTIME) -jar $(SAXONJAR) $< discmark.xsl > $@
+#$(JAVARUNTIME) -jar $(SAXONJAR) net.sf.saxon.Transform -s:$< 
+#$(JAVARUNTIME) -jar $(SAXONJAR) net.sf.saxon.Transform -s:$< -xsl:discmark.xsl -o:$@
+	$(JAVARUNTIME) -jar $(SAXONJAR)  $< discmark.xsl
 
 ALL: website
 
