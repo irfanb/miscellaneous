@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<page subtitle=": who are we?" lastupdated="$Date: 2002/10/24 21:37:07 $">
+<menuoption href="./who.html" caption="Who are we?" />
+<menuoption href="./why.html" caption="Why use us?" />
+<menuoption href="./how.html" caption="How can we help YOUR business?" />
+<menuoption href="./contactus.html" caption="Contact us" />
+<menuoption href="./privacy.html" caption="Privacy" />
+
+<bodytext>
+<bodytextheading>Who are Discmark Data Supplies?</bodytextheading>
+    <bodytextpara>
+        <paratext>
+            Discmark Data Supplies is an innovative software and computing
+            services company based in Wimbledon, South West London.
+            Founded in 1992, Discmark Data Supplies Ltd has consistently
+            delivered top quality products and services using industry
+            standard tools and innovative techniques.
+        </paratext>
+    </bodytextpara>
+</bodytext>
+</page>

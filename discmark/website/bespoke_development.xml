@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<page subtitle=": bespoke applications development" lastupdated="$Date">
+<menuoption href="./who.html" caption="Who are we?" />
+<menuoption href="./why.html" caption="Why use us?" />
+<menuoption href="./how.html" caption="How can we help YOUR business?" />
+<menuoption href="./contactus.html" caption="Contact us" />
+<menuoption href="./privacy.html" caption="Privacy" />
+
+<bodytext>
+    <bodytextheading>Bespoke Applications Development</bodytextheading>
+    <bodytextpara>
+        <paratext>
+            Discmark Data Supplies is well practiced in producing pioneering
+            software solutions using industry standard tools and
+            innovative techniques.
+        </paratext>
+        <paratext>
+            Our core development tools are:
+            <ul>
+            <li>ISO standard C++</li>
+            <li>Business modelling using UML</li>
+            <li>Relational Database Management Systems and SQL</li>
+            <li>CORBA (Common Object Request Broker Architecture)</li>
+            <li>UNIX, Linux and Windows target platforms</li>
+            <li>XML and XSLT</li>
+            <li>Java with J2EE and Enterprise Java Beans</li>
+            </ul>
+        </paratext>
+    </bodytextpara>
+</bodytext>
+</page>

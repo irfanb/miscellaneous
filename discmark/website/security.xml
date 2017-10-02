@@ -1,0 +1,35 @@
+<?xml version="1.0" ?>
+<page subtitle=": network and data security and integrity"
+lastupdated="$Date: 2002/10/24 21:37:07 $">
+<menuoption href="./who.html" caption="Who are we?" />
+<menuoption href="./why.html" caption="Why use us?" />
+<menuoption href="./how.html" caption="How can we help YOUR business?" />
+<menuoption href="./contactus.html" caption="Contact us" />
+<menuoption href="./privacy.html" caption="Privacy" />
+
+<bodytext>
+    <bodytextheading>Network and Data Security and Integrity</bodytextheading>
+    <bodytextpara>
+        <paratext>
+            Discmark Data Supplies can perform a full security audit on
+            your existing computer systems.  As a consequence of the
+            audit we can provide recommendations to help you to tighten
+            your network security or we can even implement the changes
+            for you.
+        </paratext>
+        <paratext>
+            There are several specific items which will be covered in
+            our audit.  These include but are not limited to:
+        </paratext>
+        <paratext>
+        <ul>
+            <li>Virus scanning</li>
+            <li>Corporate Network ingress and egress</li>
+            <li>User Training</li>
+            <li>Internal Systems Security</li>
+            <li>Data Backup and Restoration (disaster recovery)</li>
+        </ul>
+        </paratext>
+    </bodytextpara>
+</bodytext>
+</page>

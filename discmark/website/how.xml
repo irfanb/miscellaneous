@@ -1,0 +1,72 @@
+<?xml version="1.0" ?>
+<page subtitle=": how can we help you?" lastupdated="$Date">
+<menuoption href="./who.html" caption="Who are we?" />
+<menuoption href="./why.html" caption="Why use us?" />
+<menuoption href="./how.html" caption="How can we help YOUR business?" />
+<menuoption href="./contactus.html" caption="Contact us" />
+<menuoption href="./privacy.html" caption="Privacy" />
+
+<bodytext>
+    <bodytextheading>How can Discmark Data Supplies help YOUR business?</bodytextheading>
+    <bodytextpara>
+        <paratext>
+            Discmark Data Supplies has been producing pioneering
+            software solutions
+            and providing sensibly priced IT solutions for years.
+            We can provide a completely outsourced solution for your
+            IT needs or we can
+            work alongside your existing IT department, to
+            streamline your existing processes.
+        </paratext>
+    </bodytextpara>
+    <bodytextpara>
+        <paratext>
+            Here's an idea of the range of our portfolio of services:
+        </paratext>
+    </bodytextpara>
+    <bodytextpara>
+        <paraheading>Network and Data Security &amp; Integrity</paraheading>
+        <paratext>
+            In today's connected world we must always be ever
+            vigilant to ensure
+            the security of our data and our networks.
+            Discmark Data Supplies has a team of security consultants,
+            ready to help you ensure your
+            business is protected from attack.  Read
+            <a href="./security.html">more...</a>
+    	</paratext>
+    </bodytextpara>
+    <bodytextpara>
+        <paraheading>IT Infrastructure Design and Implementation</paraheading>
+    	<paratext>
+            Whether you are just starting to think about using IT
+            to help your business,
+            or whether you are "old hands" who think you could
+            use a little help
+            to sort out some of the details that you just don't
+            have the time for,
+            Discmark Data Supplies will be happy to help.  Read
+            <a href="./it_infrastructure.html">more...</a>
+    	</paratext>
+    </bodytextpara>
+    <bodytextpara>
+        <paraheading>Website Design, Implementation and Hosting</paraheading>
+    	<paratext>
+            If your business doesn't have a website then you are behind your
+            competition and losing potential business.  Read
+            <a href="./web_design.html">more...</a>
+    	</paratext>
+    </bodytextpara>
+    <bodytextpara>
+        <paraheading>Bespoke Application Development</paraheading>
+        <paratext>
+            For those clients requiring specific applications, Discmark Data
+            Supplies
+            can provide consultants, either on or off site,
+            to design, build and deploy
+            applications tailored to fit your business.  Read
+            <a href="./bespoke_development.html">more...</a>
+        </paratext>
+    </bodytextpara>
+</bodytext>
+</page>

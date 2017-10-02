@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<page subtitle=": contact us" lastupdated="$Date: 2002/10/24 21:29:33 $">
+<menuoption href="./who.html" caption="Who are we?" />
+<menuoption href="./why.html" caption="Why use us?" />
+<menuoption href="./how.html" caption="How can we help YOUR business?" />
+<menuoption href="./contactus.html" caption="Contact us" />
+<menuoption href="./privacy.html" caption="Privacy" />
+
+<bodytext>
+    <bodytextheading>Contact Discmark Data Supplies</bodytextheading>
+    <bodytextpara>
+        <paratext>
+            To speak with someone, please call +44 (0)20 8780 5186.<br/>
+        </paratext>
+    </bodytextpara>
+    <bodytextpara>
+        <paratext>
+            Alternatively, to send an email, please use the following
+            form:
+        </paratext>
+    </bodytextpara>
+    <bodytextpara>
+        <paratext>
+            <form METHOD="POST" NAME="contactusfrm" ACTION="./contactus.php">
+            <table>
+            <tr>
+            <td width="150"><font size="2" color="white">Your name:</font></td>
+            <td><INPUT TYPE="Text" NAME="name" size="11" /></td>
+            </tr>
+            <tr>
+            <td><font size="2" color="white">Your telephone
+            number:</font></td>
+            <td><INPUT TYPE="Text" NAME="phonenumber" size="11" /></td>
+            </tr>
+            <tr>
+            <td><font size="2" color="white">Your email address:</font></td>
+            <td><INPUT TYPE="Text" NAME="emailaddress" size="11" /></td>
+            </tr>
+            <tr>
+            <td valign="top"><font size="2" color="white">Your message:</font></td>
+            <td><textarea NAME="message" rows="20" cols="30" /></td>
+            </tr>
+            <tr>
+            <td colspan="2">
+            <INPUT TYPE="SUBMIT" NAME="SUBMIT_BUTTON" VALUE="Send" />
+            </td>
+            </tr>
+            </table>
+            </form>
+        </paratext>
+    </bodytextpara>
+</bodytext>
+</page>
