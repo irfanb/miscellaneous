@@ -25,7 +25,7 @@ public:
             {
             Thread& mt = Thread::CurrentThread();
             MutexLock lock(globalMutex);
-            printf("my thread %d %d is running %s\n", m_iThreadId,
+            printf("my thread %d %ld is running %s\n", m_iThreadId,
                   mt.getId(), mt.getName().c_str());
             }
             
@@ -46,7 +46,7 @@ private:
     int m_iThreadId;
 };
 
-void main(int argc, char* argv[])
+int main(int argc, char* argv[])
 {
     int i;
 #define NUMTHREADS 50
@@ -68,6 +68,7 @@ void main(int argc, char* argv[])
         pThread[i]->join();
         delete pThread[i];
     }
+    return 0;
 }
 
 static char const rcsid[] = "$Id: threadtest.cpp,v 1.2 2001/09/30 22:54:31 irfan Exp $";
