@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <list>
 #include <string>
-#include <iostream.h>
-#include <fstream.h>
+#include <iostream>
+#include <fstream>
 
 #include "logsource.h"
 #include "logsink.h"
@@ -58,7 +58,7 @@ LogSource& LogSource::operator<< (const std::string& val)
    return *this;
 }
 
-LogSource& LogSource::operator<< ( ::ostream&(rhs)(::ostream&) )
+LogSource& LogSource::operator<< (std::ostream&(rhs)(std::ostream&) )
 {
    std::list<LogSink*>::iterator i = m_listSinks.begin();
 

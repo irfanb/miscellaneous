@@ -12,7 +12,7 @@ public:
 
     LogSource& operator<< (const char* psz);
     LogSource& operator<< (const std::string& val);
-    LogSource& operator<< (::ostream&(rhs)(::ostream&) );
+    LogSource& operator<< (std::ostream&(rhs)(std::ostream&) );
     LogSource& operator<< (long rhs);
 
 private:
