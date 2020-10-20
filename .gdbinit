@@ -20,7 +20,7 @@ set debug-file-directory .
 handle SIGINT stop
 
 #skip -file std_function.h
-#skip -gfile /opt/gcc-7.3.0/include/*
+skip -gfile /opt/gcc-7.3.0/include/*
 
 tui enable
 
