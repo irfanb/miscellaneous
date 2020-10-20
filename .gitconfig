@@ -1,0 +1,35 @@
+[user]
+    name = Irfan Butt
+    email = ibutt@blahblah.com
+
+#[diff]
+    #external = vimdiff
+    #tool = vimdiff
+
+[credential]
+        helper = cache --timeout 108000
+
+[push]
+    default = current
+[merge]
+        tool = vimdiff
+[diff]
+#       prompt = false
+#        tool = vimdiff
+#[difftool]
+[difftool "vimdiff"] cmd = vim -n -f -d -c 'wincmd l' -c 'cd "$GIT_PREFIX"' "$LOCAL" "$REMOTE"
+#       prompt = false
+
+
+[alias]
+        d = difftool
+  undo-commit = reset --soft HEAD^
+  set-upstream = !git branch --set-upstream-to=origin/`git symbolic-ref --short HEAD`
+        co = checkout
+        br = branch
+        ci = commit
+        st = status
+[status]
+        submoduleSummary = true
+[color]
+        ui = true
