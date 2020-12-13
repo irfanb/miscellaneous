@@ -15,7 +15,7 @@ set cmdheight=2
 set errorfile=/tmp/errors.vim
 set makeprg=make
 set makeef=~/tmp/errors
-set errorformat=%f:%l:\ %m
+set errorformat=%f\:%l\:%c\:\ %m
 set tags=./tags,tags,~/LH/tags
 set ruler
 set noequalalways
