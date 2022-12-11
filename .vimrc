@@ -1,4 +1,4 @@
-ser csre
+set csre
 set nocompatible
 set diffopt+=iwhite
 set fileformats=unix,dos
