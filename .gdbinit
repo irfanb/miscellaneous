@@ -19,6 +19,11 @@ set debug-file-directory .
 
 handle SIGINT stop
 
+# if loading symbols for your shared objects takes a long time, you can disable this by default
+# set auto-solib-add off
+# then you can load shared libraries by hand like so:
+# sharedlibrary libTest
+
 #skip -file std_function.h
 skip -gfile /opt/gcc-7.3.0/include/*
 
