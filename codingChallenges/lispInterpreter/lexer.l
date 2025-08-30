@@ -30,6 +30,7 @@ colon   [:]
 lparen   [(]
 rparen   [)]
 identifier {letter}({letter}|{digit})*
+number {digit}+
 
 %%
 "+"                  { return PLUS;       }
@@ -61,9 +62,11 @@ identifier {letter}({letter}|{digit})*
 		       printf("found EXPRESSION %s\n", yytext);
 		       return EXPRESSION;
 		       }
-{digit}+             { yylval.num = atoi(yytext);
+{number} {
+                       yylval.num = atoi(yytext);
 		       printf("found number %d\n", yylval.num);
-                       return NUMBER;     }
+                       return NUMBER;
+		       }
 [ \t\n\r]            /* skip whitespace */
 .                    { printf("Unknown character [%c]\n",yytext[0]);
                        return UNKNOWN;    }
