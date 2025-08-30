@@ -58,7 +58,7 @@ number {digit}+
                        yylval.id = strdup(yytext);
 		       printf("found SYMBOLATOM %s\n", yylval.id);
                        return SYMBOLATOM;      }
-{lparen}({identifier}|{digit})*{rparen} {
+{lparen}({identifier}|{number})*{rparen} {
 		       printf("found EXPRESSION %s\n", yytext);
 		       return EXPRESSION;
 		       }
