@@ -57,9 +57,10 @@ identifier {letter}({letter}|{digit})*
                        yylval.id = strdup(yytext);
 		       printf("found SYMBOLATOM %s\n", yylval.id);
                        return SYMBOLATOM;      }
-{lparen}{identifier}{rparen} {
-		       printf("found EXPRESSION\n");
-		       return EXPRESSION;	}
+{lparen}({identifier}|{digit})*{rparen} {
+		       printf("found EXPRESSION %s\n", yytext);
+		       return EXPRESSION;
+		       }
 {digit}+             { yylval.num = atoi(yytext);
 		       printf("found number %d\n", yylval.num);
                        return NUMBER;     }
