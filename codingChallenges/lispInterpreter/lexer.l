@@ -4,8 +4,6 @@
 #define MINUS 2
 #define TIMES 3
 #define FORWARDSLASH 4
-#define LPAREN 5
-#define RPAREN 6
 #define SEMICOLON 7
 #define COMMA 8
 #define PERIOD 9
@@ -18,7 +16,9 @@
 #define IDENT 16
 #define NUMBER 17
 #define UNKNOWN 18
-#define STRINGATOM 18
+#define STRINGATOM 19
+#define SYMBOLATOM 20
+#define EXPRESSION 21
 
 union YYSTYPE yylval;
 %}
@@ -27,14 +27,15 @@ digit         [0-9]
 letter        [a-zA-Z]
 doublequote   ["]
 colon   [:]
+lparen   [(]
+rparen   [)]
+identifier {letter}({letter}|{digit})*
 
 %%
 "+"                  { return PLUS;       }
 "-"                  { return MINUS;      }
 "*"                  { return TIMES;      }
 "/"                  { return FORWARDSLASH;      }
-"("                  { return LPAREN;     }
-")"                  { return RPAREN;     }
 ";"                  { return SEMICOLON;  }
 ","                  { return COMMA;      }
 "."                  { return PERIOD;     }
@@ -44,7 +45,7 @@ colon   [:]
 ">"                  { return GREATERTHAN;        }
 "<="                 { return LEQ;        }
 ">="                 { return GEQ;        }
-{letter}({letter}|{digit})* {
+{identifier} {
                        yylval.id = strdup(yytext);
 		       printf("found id %s\n", yylval.id);
                        return IDENT;      }
@@ -52,6 +53,13 @@ colon   [:]
                        yylval.id = strdup(yytext);
 		       printf("found STRINGATOM %s\n", yylval.id);
                        return STRINGATOM;      }
+{colon}{letter}({letter}|{digit})* {
+                       yylval.id = strdup(yytext);
+		       printf("found SYMBOLATOM %s\n", yylval.id);
+                       return SYMBOLATOM;      }
+{lparen}{identifier}{rparen} {
+		       printf("found EXPRESSION\n");
+		       return EXPRESSION;	}
 {digit}+             { yylval.num = atoi(yytext);
 		       printf("found number %d\n", yylval.num);
                        return NUMBER;     }
