@@ -53,7 +53,7 @@ identifier {letter}({letter}|{digit})*
                        yylval.id = strdup(yytext);
 		       printf("found STRINGATOM %s\n", yylval.id);
                        return STRINGATOM;      }
-{colon}{letter}({letter}|{digit})* {
+{colon}{identifier} {
                        yylval.id = strdup(yytext);
 		       printf("found SYMBOLATOM %s\n", yylval.id);
                        return SYMBOLATOM;      }
