@@ -18,14 +18,15 @@
 #define IDENT 16
 #define NUMBER 17
 #define UNKNOWN 18
-
-
+#define STRINGATOM 18
 
 union YYSTYPE yylval;
 %}
 
 digit         [0-9]
 letter        [a-zA-Z]
+doublequote   ["]
+colon   [:]
 
 %%
 "+"                  { return PLUS;       }
@@ -45,10 +46,14 @@ letter        [a-zA-Z]
 ">="                 { return GEQ;        }
 {letter}({letter}|{digit})* {
                        yylval.id = strdup(yytext);
-		       printf("found id %s", yylval.id);
+		       printf("found id %s\n", yylval.id);
                        return IDENT;      }
+{doublequote}[^"]*{doublequote} {
+                       yylval.id = strdup(yytext);
+		       printf("found STRINGATOM %s\n", yylval.id);
+                       return STRINGATOM;      }
 {digit}+             { yylval.num = atoi(yytext);
-		       printf("found number %d", yylval.num);
+		       printf("found number %d\n", yylval.num);
                        return NUMBER;     }
 [ \t\n\r]            /* skip whitespace */
 .                    { printf("Unknown character [%c]\n",yytext[0]);
