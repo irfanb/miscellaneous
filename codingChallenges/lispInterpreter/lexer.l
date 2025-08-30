@@ -60,6 +60,10 @@ symbolatom {colon}{identifier}
                        yylval.id = strdup(yytext);
 		       printf("found SYMBOLATOM %s\n", yylval.id);
                        return SYMBOLATOM;      }
+{lparen}{rparen} {
+		       printf("found empty EXPRESSION %s\n", yytext);
+		       return EXPRESSION;
+		       }
 {lparen}({identifier}|{number}|{symbolatom})*{rparen} {
 		       printf("found EXPRESSION %s\n", yytext);
 		       return EXPRESSION;

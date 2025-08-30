@@ -4,6 +4,6 @@ found STRINGATOM "3230csdjsh  jcjsnkd the quick brown fox jumped over the lazy d
 found id hereIsAnIdentifier22
 found EXPRESSION (expression)
 found EXPRESSION (1)
-found EXPRESSION ()
+found empty EXPRESSION ()
 found EXPRESSION (123456)
 found EXPRESSION (:sa)
