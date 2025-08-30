@@ -31,6 +31,8 @@ lparen   [(]
 rparen   [)]
 identifier {letter}({letter}|{digit})*
 number {digit}+
+stringatom {doublequote}[^"]*{doublequote}
+symbolatom {colon}{identifier}
 
 %%
 "+"                  { return PLUS;       }
@@ -50,15 +52,15 @@ number {digit}+
                        yylval.id = strdup(yytext);
 		       printf("found id %s\n", yylval.id);
                        return IDENT;      }
-{doublequote}[^"]*{doublequote} {
+{stringatom} {
                        yylval.id = strdup(yytext);
 		       printf("found STRINGATOM %s\n", yylval.id);
                        return STRINGATOM;      }
-{colon}{identifier} {
+{symbolatom} {
                        yylval.id = strdup(yytext);
 		       printf("found SYMBOLATOM %s\n", yylval.id);
                        return SYMBOLATOM;      }
-{lparen}({identifier}|{number})*{rparen} {
+{lparen}({identifier}|{number}|{symbolatom})*{rparen} {
 		       printf("found EXPRESSION %s\n", yytext);
 		       return EXPRESSION;
 		       }
