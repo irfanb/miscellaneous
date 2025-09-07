@@ -19,6 +19,8 @@
 #define STRINGATOM 19
 #define SYMBOLATOM 20
 #define EXPRESSION 21
+#define EXPRESSIONELEMENT 22
+#define ENDEXPRESSION 23
 
 union YYSTYPE yylval;
 %}
@@ -33,6 +35,7 @@ identifier {letter}({letter}|{digit})*
 number {digit}+
 stringatom {doublequote}[^"]*{doublequote}
 symbolatom {colon}{identifier}
+%s BEGINEXPRESSION
 
 %%
 "+"                  { return PLUS;       }
@@ -60,13 +63,25 @@ symbolatom {colon}{identifier}
                        yylval.id = strdup(yytext);
 		       printf("found SYMBOLATOM %s\n", yylval.id);
                        return SYMBOLATOM;      }
-{lparen}{rparen} {
-		       printf("found empty EXPRESSION %s\n", yytext);
-		       return EXPRESSION;
+{lparen} {
+		       printf("found BEGINEXPRESSION %s\n", yytext);
+			BEGIN(BEGINEXPRESSION);
+			}
+<BEGINEXPRESSION>{rparen} {
+		       printf("found ENDEXPRESSION %s\n", yytext);
+		       return ENDEXPRESSION;
 		       }
-{lparen}({identifier}|{number}|{symbolatom})*{rparen} {
-		       printf("found EXPRESSION %s\n", yytext);
-		       return EXPRESSION;
+<BEGINEXPRESSION>{identifier} {
+		       printf("found EXPRESSIONELEMENT %s\n", yytext);
+		       return EXPRESSIONELEMENT;
+		       }
+<BEGINEXPRESSION>{number} {
+		       printf("found EXPRESSIONELEMENT %s\n", yytext);
+		       return EXPRESSIONELEMENT;
+		       }
+<BEGINEXPRESSION>{symbolatom} {
+		       printf("found EXPRESSIONELEMENT %s\n", yytext);
+		       return EXPRESSIONELEMENT;
 		       }
 {number} {
                        yylval.num = atoi(yytext);

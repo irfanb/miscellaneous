@@ -2,8 +2,21 @@ found number 23728376
 found SYMBOLATOM :plop
 found STRINGATOM "3230csdjsh  jcjsnkd the quick brown fox jumped over the lazy dog"
 found id hereIsAnIdentifier22
-found EXPRESSION (expression)
-found EXPRESSION (1)
-found empty EXPRESSION ()
-found EXPRESSION (123456)
-found EXPRESSION (:sa)
+found BEGINEXPRESSION (
+found id expression
+found ENDEXPRESSION )
+found BEGINEXPRESSION (
+found EXPRESSIONELEMENT 1
+found ENDEXPRESSION )
+found BEGINEXPRESSION (
+found ENDEXPRESSION )
+found BEGINEXPRESSION (
+found EXPRESSIONELEMENT 123456
+found ENDEXPRESSION )
+found BEGINEXPRESSION (
+found SYMBOLATOM :sa
+found ENDEXPRESSION )
+found BEGINEXPRESSION (
+found EXPRESSIONELEMENT 1
+found EXPRESSIONELEMENT 123456
+found ENDEXPRESSION )
