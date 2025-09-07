@@ -1,0 +1,15 @@
+found number 1
+found STRINGATOM "Hello, Coding Challenges"
+found SYMBOLATOM :CC
+found BEGINEXPRESSION (
+found id format
+found id t
+found STRINGATOM "Hello, Coding Challenge World World"
+found ENDEXPRESSION )
+found BEGINEXPRESSION (
+found id defun
+found id hello
+found BEGINEXPRESSION (
+found ENDEXPRESSION )
+found STRINGATOM "Hello, Coding Challenge World"
+found ENDEXPRESSION )
