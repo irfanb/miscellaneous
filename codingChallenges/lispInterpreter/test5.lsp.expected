@@ -1,0 +1,63 @@
+found BEGINEXPRESSION (
+found id defun
+found id fib
+found BEGINEXPRESSION (
+found id n
+found ENDEXPRESSION )
+found BEGINEXPRESSION (
+found id if
+found BEGINEXPRESSION (
+found LESSTHAN
+found id n
+found EXPRESSIONELEMENT 2
+found ENDEXPRESSION )
+found id n
+found BEGINEXPRESSION (
+found PLUS
+found BEGINEXPRESSION (
+found id fib
+found BEGINEXPRESSION (
+found MINUS
+found id n
+found EXPRESSIONELEMENT 1
+found ENDEXPRESSION )
+found ENDEXPRESSION )
+found BEGINEXPRESSION (
+found id fib
+found BEGINEXPRESSION (
+found MINUS
+found id n
+found EXPRESSIONELEMENT 2
+found ENDEXPRESSION )
+found ENDEXPRESSION )
+found ENDEXPRESSION )
+found ENDEXPRESSION )
+found ENDEXPRESSION )
+found BEGINEXPRESSION (
+found id defun
+found id fact
+found BEGINEXPRESSION (
+found id n
+found ENDEXPRESSION )
+found BEGINEXPRESSION (
+found id if
+found BEGINEXPRESSION (
+found LEQ
+found id n
+found EXPRESSIONELEMENT 1
+found ENDEXPRESSION )
+found EXPRESSIONELEMENT 1
+found BEGINEXPRESSION (
+found TIMES
+found id n
+found BEGINEXPRESSION (
+found id fact
+found BEGINEXPRESSION (
+found MINUS
+found id n
+found EXPRESSIONELEMENT 1
+found ENDEXPRESSION )
+found ENDEXPRESSION )
+found ENDEXPRESSION )
+found ENDEXPRESSION )
+found ENDEXPRESSION )
