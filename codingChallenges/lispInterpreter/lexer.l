@@ -32,26 +32,52 @@ doublequote   ["]
 colon   [:]
 lparen   [(]
 rparen   [)]
-identifier {letter}({letter}|{digit})*
+identifier {letter}({letter}|{digit}|-)*
 number {digit}+
 stringatom {doublequote}[^"]*{doublequote}
 symbolatom {colon}{identifier}
 %s BEGINEXPRESSION
 
 %%
-"+"                  { return PLUS;       }
-"-"                  { return MINUS;      }
-"*"                  { return TIMES;      }
-"/"                  { return FORWARDSLASH;      }
-";"                  { return SEMICOLON;  }
-","                  { return COMMA;      }
-"."                  { return PERIOD;     }
-"="                  { return EQUAL;        }
-"<>"                 { return NOTEQUAL;        }
-"<"                  { return LESSTHAN;        }
-">"                  { return GREATERTHAN;        }
-"<="                 { return LEQ;        }
-">="                 { return GEQ;        }
+"+"                  {
+printf("found PLUS\n");
+return PLUS;       }
+"-"                  {
+printf("found MINUS\n");
+return MINUS;      }
+"*"                  {
+printf("found TIMES\n");
+return TIMES;      }
+"/"                  {
+printf("found FORWARDSLASH\n");
+return FORWARDSLASH;      }
+";"                  {
+printf("found SEMICOLON\n");
+return SEMICOLON;  }
+","                  {
+printf("found COMMA\n");
+return COMMA;      }
+"."                  {
+printf("found PERIOD\n");
+return PERIOD;     }
+"="                  {
+printf("found EQUAL\n");
+return EQUAL;        }
+"<>"                 {
+printf("found NOTEQUAL\n");
+return NOTEQUAL;        }
+"<"                  {
+printf("found LESSTHAN\n");
+return LESSTHAN;        }
+">"                  {
+printf("found GREATERTHAN\n");
+return GREATERTHAN;        }
+"<="                 {
+printf("found LEQ\n");
+return LEQ;        }
+">="                 {
+printf("found GEQ\n");
+return GEQ;        }
 {identifier} {
                        yylval.id = strdup(yytext);
 		       printf("found id %s\n", yylval.id);
