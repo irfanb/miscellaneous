@@ -13,5 +13,7 @@ test: lexer
 	diff test2.lsp.expected output2.actual
 	cat test3.lsp| ./lexer > output3.actual
 	diff test3.lsp.expected output3.actual
+	cat test4.lsp| ./lexer > output4.actual
+	diff test4.lsp.expected output4.actual
 
 
