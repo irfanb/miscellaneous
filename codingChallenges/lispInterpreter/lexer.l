@@ -23,6 +23,7 @@
 #define ENDEXPRESSION 23
 
 union YYSTYPE yylval;
+size_t lineNumber = 1;
 %}
 
 digit         [0-9]
@@ -88,7 +89,10 @@ symbolatom {colon}{identifier}
 		       printf("found number %d\n", yylval.num);
                        return NUMBER;
 		       }
-[ \t\n\r]            /* skip whitespace */
+[\n] {
+++lineNumber;
+}
+[ \t\r]            /* skip whitespace */
 .                    { printf("Unknown character [%c]\n",yytext[0]);
                        return UNKNOWN;    }
 %%
