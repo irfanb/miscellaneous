@@ -1,5 +1,5 @@
 %{
-#include "y.tab.h"
+//#include "y.tab.h"
 #define PLUS 1
 #define MINUS 2
 #define TIMES 3
@@ -22,9 +22,12 @@
 #define EXPRESSIONELEMENT 22
 #define ENDEXPRESSION 23
 
-union YYSTYPE yylval;
+//union YYSTYPE yylval;
 size_t lineNumber = 1;
 %}
+
+%option noyywrap c++
+
 
 digit         [0-9]
 letter        [a-zA-Z]
@@ -79,16 +82,16 @@ return LEQ;        }
 printf("found GEQ\n");
 return GEQ;        }
 {identifier} {
-                       yylval.id = strdup(yytext);
-		       printf("found id %s\n", yylval.id);
+                       //yylval.id = strdup(yytext);
+		       //printf("found id %s\n", yylval.id);
                        return IDENT;      }
 {stringatom} {
-                       yylval.id = strdup(yytext);
-		       printf("found STRINGATOM %s\n", yylval.id);
+                       //yylval.id = strdup(yytext);
+		       //printf("found STRINGATOM %s\n", yylval.id);
                        return STRINGATOM;      }
 {symbolatom} {
-                       yylval.id = strdup(yytext);
-		       printf("found SYMBOLATOM %s\n", yylval.id);
+                       //yylval.id = strdup(yytext);
+		       //printf("found SYMBOLATOM %s\n", yylval.id);
                        return SYMBOLATOM;      }
 {lparen} {
 		       printf("found BEGINEXPRESSION %s\n", yytext);
@@ -111,8 +114,8 @@ return GEQ;        }
 		       return EXPRESSIONELEMENT;
 		       }
 {number} {
-                       yylval.num = atoi(yytext);
-		       printf("found number %d\n", yylval.num);
+                       //yylval.num = atoi(yytext);
+		       //printf("found number %d\n", yylval.num);
                        return NUMBER;
 		       }
 [\n] {
