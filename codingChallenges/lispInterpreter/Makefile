@@ -3,6 +3,21 @@
 lex.yy.c foo.h: lexer.l
 	flex --header-file=foo.h lexer.l
 
+parser.tab.c parser.tab.h: parser.y
+	bison -d parser.y
+
+parser.tab.o: parser.tab.c parser.tab.h
+	gcc -g -O0 -c $< -ll
+
+main.o: main.c
+	gcc -g -O0 -c $< -ll
+
+lex.yy.o: lex.yy.c parser.tab.h
+	gcc -g -O0 -c $< -ll
+
+parser: main.o lex.yy.o parser.tab.o
+	gcc -g -o parser main.o lex.yy.o parser.tab.o
+
 lexer: lex.yy.c main.c
 	gcc -g -O0 -o lexer  lex.yy.c main.c -ll
 

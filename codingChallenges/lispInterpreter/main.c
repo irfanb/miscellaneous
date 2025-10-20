@@ -2,11 +2,17 @@
 #include "foo.h"
 
 
-extern int yylex();
+//extern int yylex();
+extern int yyparse (void);
+extern size_t lineNumber;
+
+void yyerror(char const *message) {
+	printf("Error: %s %ld\n", message, lineNumber);
+}
 
 int main(int argc, char* argv[])
 {
 	yyin = stdin;
-	while (yylex() != 0);
-	return 0;
+	int result_code = yyparse();
+	return result_code;
 }

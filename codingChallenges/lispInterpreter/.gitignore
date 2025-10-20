@@ -1,0 +1,5 @@
+lex.yy.[ch]
+lex.yy.cc
+*.o
+*.actual
+parser.tab.[ch]
