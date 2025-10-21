@@ -24,39 +24,39 @@ symbolatom {colon}{identifier}
 
 %%
 {identifier} {
-	yylval.id = strdup(yytext);
-	printf("%ld: found id %s\n", lineNumber, yylval.id);
+	yylval.m_id = strdup(yytext);
+	//printf("%ld: found id %s\n", lineNumber, yylval.id);
 	return IDENT;
 	}
 {stringatom} {
-	yylval.id = strdup(yytext);
-	printf("%ld: found STRINGATOM %s\n", lineNumber, yylval.id);
+	yylval.m_id = strdup(yytext);
+	//printf("%ld: found STRINGATOM %s\n", lineNumber, yylval.id);
 	return STRINGATOM;
 	}
 {symbolatom} {
-	yylval.id = strdup(yytext);
-	printf("found SYMBOLATOM %s\n", yylval.id);
+	yylval.m_id = strdup(yytext);
+	//printf("found SYMBOLATOM %s\n", yylval.id);
 	return SYMBOLATOM;
 	}
 {lparen} {
-	printf("%ld: found BEGINEXPRESSION %s\n", lineNumber, yytext);
+	//printf("%ld: found BEGINEXPRESSION %s\n", lineNumber, yytext);
 	return BEGINEXPRESSION;
 	}
 {rparen} {
-	printf("%ld: found ENDEXPRESSION %s\n", lineNumber, yytext);
+	//printf("%ld: found ENDEXPRESSION %s\n", lineNumber, yytext);
 	return ENDEXPRESSION;
 	}
 {number} {
-	yylval.num = atoi(yytext);
-	printf("%ld: found number %d\n", lineNumber, yylval.num);
+	yylval.m_num = atoi(yytext);
+	//printf("%ld: found number %d\n", lineNumber, yylval.num);
 	return NUMBER;
 	}
 [+] {
-	printf("%ld: found PLUS\n", lineNumber);
+	//printf("%ld: found PLUS\n", lineNumber);
 	return PLUS;
 	}
 [-] {
-	printf("%ld: found MINUS\n", lineNumber);
+	//printf("%ld: found MINUS\n", lineNumber);
 	return MINUS;
 	}
 [\n] {

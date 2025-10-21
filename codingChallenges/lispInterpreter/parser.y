@@ -5,6 +5,8 @@
   extern int yyerror(const char *message);
   extern int yylex(void);
 #include "y.tab.h"
+
+
 %}
  
 /* Declarations of terminals */
@@ -17,19 +19,33 @@ sexpression:
 	   expression
 	   { printf("expression\n"); }
 	   | atom
-	   { printf("atom\n"); }
+	   { /*printf("atom\n"); */ }
 	   ;
 
 expression: BEGINEXPRESSION ENDEXPRESSION
-	  { printf("empty list");
-	    }
+	  { /*printf("empty list"); */
+	  $$.m_sequence = std::vector<member>();
+	  }
 	  | BEGINEXPRESSION members ENDEXPRESSION
-	  { printf("non empty list"); }
+	  { /*printf("non empty list"); */
+	  $$.m_sequence = $2.m_sequence;
+	  }
 	  ;
 
-members: sexpression | sexpression members;
+members: sexpression
+       {
+       $$.m_sequence = $1.m_sequence;
+       }
+       | sexpression members
+       {
+       $$.m_sequence.push_back($2.m_member);
+       }
+       ;
 
-atom: STRINGATOM | IDENT | SYMBOLATOM | NUMBER | PLUS | MINUS
-	{printf("atom\n");
-	}
+atom: STRINGATOM | IDENT | SYMBOLATOM 
+	{printf("string style atom %s\n", yylval.m_id); }
+	| PLUS | MINUS
+	{printf("operator atom\n"); }
+    | NUMBER
+	{printf("number atom %ld\n", yylval.m_num); }
 	;
