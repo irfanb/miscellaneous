@@ -34,7 +34,7 @@ typedef union {
 } mysemantictype;
 */
 
-using sequence = std::vector< member >;
+//using sequence = std::vector< member >;
 class mysemantictype {
 public:
 	std::string toString() const {
@@ -52,6 +52,7 @@ public:
 					r = arg.toString() + " operator";
 				} else {
 					for (const auto& a : arg) {
+						r+= a.toString();
 					}
 					r += "members of size ";
 					r += std::to_string( arg.size() );
@@ -72,13 +73,13 @@ public:
 	void m_num( int newValue ) {
 		m_value = newValue;
 	};
-	const std::vector< member >& m_sequence() const {
-		return std::get< std::vector< member > >(m_value);
+	const std::vector< mysemantictype >& m_sequence() const {
+		return std::get< std::vector< mysemantictype > >(m_value);
 	};
-	const std::vector< member >& getSequence() const {
+	const std::vector< mysemantictype >& getSequence() const {
 		return m_sequence();
 	};
-	void m_sequence(const std::vector< member >& newValue) {
+	void m_sequence(const std::vector< mysemantictype >& newValue) {
 		m_value = newValue;
 	};
 	void setOperator(const std::string& newValue) {
@@ -87,7 +88,7 @@ public:
 	void setStringAtom(const char* newValue) {
 		m_value = StringAtom(newValue);
 	};
-	std::variant< std::string, int, Operator, StringAtom, sequence > m_value;
+	std::variant< std::string, int, Operator, StringAtom, std::vector< mysemantictype> > m_value;
 };
 
 #define YYSTYPE mysemantictype

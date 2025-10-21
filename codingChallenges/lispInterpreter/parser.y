@@ -27,7 +27,7 @@ sexpression:
 
 expression: BEGINEXPRESSION ENDEXPRESSION
 	  { /*printf("empty list"); */
-	  $$.m_sequence( std::vector<member>() );
+	  $$.m_sequence( std::vector<mysemantictype>() );
 	  }
 	  | BEGINEXPRESSION members ENDEXPRESSION
 	  { /*printf("non empty list"); */
@@ -44,7 +44,9 @@ members: sexpression
 	LOG(INFO) 
        << "sexpression is " << $1.toString() << " members is " << $2.toString();
        //const auto jkl = $2.getSequence();
-       std::vector< member > s;
+       std::vector< mysemantictype > s;
+       s.push_back($1);
+       s.push_back($2);
        $$.m_sequence(s);
        }
        ;
