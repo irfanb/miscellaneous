@@ -4,8 +4,11 @@
   #include <stdio.h>
   extern int yyerror(const char *message);
   extern int yylex(void);
+#include <iostream>
 #include "y.tab.h"
 
+#include "absl/log/log.h"
+#include "absl/log/check.h"
 
 %}
  
@@ -17,35 +20,36 @@
 
 sexpression:
 	   expression
-	   { printf("expression\n"); }
+	   { LOG(INFO) << "expression " << $1.toString(); }
 	   | atom
-	   { /*printf("atom\n"); */ }
+	   { LOG(INFO) << "atom " << $1.toString(); }
 	   ;
 
 expression: BEGINEXPRESSION ENDEXPRESSION
 	  { /*printf("empty list"); */
-	  $$.m_sequence = std::vector<member>();
+	  $$.m_sequence( std::vector<member>() );
 	  }
 	  | BEGINEXPRESSION members ENDEXPRESSION
 	  { /*printf("non empty list"); */
-	  $$.m_sequence = $2.m_sequence;
+       LOG(INFO) << "members is " << $1.toString();
 	  }
 	  ;
 
 members: sexpression
        {
-       $$.m_sequence = $1.m_sequence;
+       LOG(INFO) << "sexpression is " << $1.toString();
        }
        | sexpression members
        {
-       $$.m_sequence.push_back($2.m_member);
+	LOG(INFO) 
+       << "sexpression is " << $1.toString() << " members is " << $2.toString();
        }
        ;
 
 atom: STRINGATOM | IDENT | SYMBOLATOM 
-	{printf("string style atom %s\n", yylval.m_id); }
+	{LOG(INFO) << "string style atom " << yylval.m_id(); }
 	| PLUS | MINUS
 	{printf("operator atom\n"); }
     | NUMBER
-	{printf("number atom %ld\n", yylval.m_num); }
+	{printf("number atom %ld\n", yylval.m_num()); }
 	;

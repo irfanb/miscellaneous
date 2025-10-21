@@ -24,17 +24,17 @@ symbolatom {colon}{identifier}
 
 %%
 {identifier} {
-	yylval.m_id = strdup(yytext);
+	yylval.m_id( strdup(yytext) );
 	//printf("%ld: found id %s\n", lineNumber, yylval.id);
 	return IDENT;
 	}
 {stringatom} {
-	yylval.m_id = strdup(yytext);
+	yylval.m_id( strdup(yytext) );
 	//printf("%ld: found STRINGATOM %s\n", lineNumber, yylval.id);
 	return STRINGATOM;
 	}
 {symbolatom} {
-	yylval.m_id = strdup(yytext);
+	yylval.m_id( strdup(yytext) );
 	//printf("found SYMBOLATOM %s\n", yylval.id);
 	return SYMBOLATOM;
 	}
@@ -47,7 +47,7 @@ symbolatom {colon}{identifier}
 	return ENDEXPRESSION;
 	}
 {number} {
-	yylval.m_num = atoi(yytext);
+	yylval.m_num( atoi(yytext) );
 	//printf("%ld: found number %d\n", lineNumber, yylval.num);
 	return NUMBER;
 	}
