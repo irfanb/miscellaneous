@@ -25,12 +25,12 @@ symbolatom {colon}{identifier}
 %%
 {identifier} {
 	yylval.id = strdup(yytext);
-	printf("found id %s\n", yylval.id);
+	printf("%ld: found id %s\n", lineNumber, yylval.id);
 	return IDENT;
 	}
 {stringatom} {
 	yylval.id = strdup(yytext);
-	printf("found STRINGATOM %s\n", yylval.id);
+	printf("%ld: found STRINGATOM %s\n", lineNumber, yylval.id);
 	return STRINGATOM;
 	}
 {symbolatom} {
@@ -39,11 +39,11 @@ symbolatom {colon}{identifier}
 	return SYMBOLATOM;
 	}
 {lparen} {
-	//printf("%ld: found BEGINEXPRESSION %s\n", lineNumber, yytext);
+	printf("%ld: found BEGINEXPRESSION %s\n", lineNumber, yytext);
 	return BEGINEXPRESSION;
 	}
 {rparen} {
-	//printf("%ld: found ENDEXPRESSION %s\n", lineNumber, yytext);
+	printf("%ld: found ENDEXPRESSION %s\n", lineNumber, yytext);
 	return ENDEXPRESSION;
 	}
 {number} {

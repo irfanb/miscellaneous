@@ -1,7 +1,12 @@
-(thisistheinside)
+(
+ (thisistheinside)
 ("plop")
 (+)
 (-)
 (927498928)
 (:thisIsASymbolAtom)
 (+ 1 2)
+()
+(format t "Hello, Coding Challenge World World")
+(defun hello () "Hello, Coding Challenge World")
+)

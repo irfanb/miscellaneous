@@ -12,18 +12,22 @@
  
 %%
 /* Grammar rules */
-sexpressionlist: sexpressionlist sexpression | sexpression
-	{printf("sexpressionlist\n");}
-	       ;
 
-sexpression: BEGINEXPRESSION sexpressionelementlist ENDEXPRESSION
-	{printf("sexpression\n");}
-	;
+sexpression:
+	   expression
+	   { printf("expression\n"); }
+	   | atom
+	   { printf("atom\n"); }
+	   ;
 
-sexpressionelementlist: sexpressionelementlist sexpressionelement | sexpressionelement
-	{printf("sexpressionelementlist\n");}
-		      ;
+expression: BEGINEXPRESSION ENDEXPRESSION
+	  { printf("empty list"); }
+	  | BEGINEXPRESSION members ENDEXPRESSION
+	  { printf("non empty list"); }
+	  ;
 
-sexpressionelement: STRINGATOM | IDENT | SYMBOLATOM | NUMBER | PLUS | MINUS
-	{printf("sexpressionelement\n");}
+members: sexpression | sexpression members;
+
+atom: STRINGATOM | IDENT | SYMBOLATOM | NUMBER | PLUS | MINUS
+	{printf("atom\n");}
 	;
