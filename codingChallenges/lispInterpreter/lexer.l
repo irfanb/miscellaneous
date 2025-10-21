@@ -24,17 +24,17 @@ symbolatom {colon}{identifier}
 
 %%
 {identifier} {
-	yylval.m_id( strdup(yytext) );
+	yylval.m_id( IdentifierAtom( strdup(yytext) ) );
 	//printf("%ld: found id %s\n", lineNumber, yylval.id);
 	return IDENT;
 	}
 {stringatom} {
-	yylval.m_id( strdup(yytext) );
+	yylval.setStringAtom( yytext );
 	//printf("%ld: found STRINGATOM %s\n", lineNumber, yylval.id);
 	return STRINGATOM;
 	}
 {symbolatom} {
-	yylval.setStringAtom( yytext );
+	yylval.setSymbolAtom( std::string( yytext ) );
 	//printf("found SYMBOLATOM %s\n", yylval.id);
 	return SYMBOLATOM;
 	}

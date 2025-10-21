@@ -19,45 +19,73 @@
 /* Grammar rules */
 
 sexpression:
-	   expression
-	   { LOG(INFO) << "expression " << $1.toString(); }
-	   | atom
-	   { LOG(INFO) << "atom " << $1.toString(); }
-	   ;
+       expression
+       {
+       LOG(INFO) << "( " << $1.toString() << " )";
+       $$ = $1;
+       }
+       | atom
+       {
+       //LOG(INFO) << "atom " << $1.toString();
+       $$ = $1;
+       }
+       ;
 
-expression: BEGINEXPRESSION ENDEXPRESSION
-	  { /*printf("empty list"); */
-	  $$.m_sequence( std::vector<mysemantictype>() );
-	  }
-	  | BEGINEXPRESSION members ENDEXPRESSION
-	  { /*printf("non empty list"); */
-       LOG(INFO) << "members is " << $1.toString();
-	  }
-	  ;
+expression:
+    BEGINEXPRESSION ENDEXPRESSION
+    {
+        //$$.m_sequence( std::vector<mysemantictype>() );
+    mysemantictype emptySemanticType;
+    emptySemanticType.setEmptySequence();
+        //LOG(INFO) << "emptySemanticType is " << emptySemanticType.toString();
+        $$ = emptySemanticType;
+    }
+    |
+    BEGINEXPRESSION members ENDEXPRESSION
+    {
+        //LOG(INFO) << "members is " << $1.toString();
+        $$ = $1;
+    }
+    ;
 
 members: sexpression
        {
-       LOG(INFO) << "sexpression is " << $1.toString();
+       //LOG(INFO) << "sexpression is " << $1.toString();
+       $$ = $1;
        }
        | sexpression members
        {
-	LOG(INFO) 
-       << "sexpression is " << $1.toString() << " members is " << $2.toString();
+       //LOG(INFO) << "sexpression is " << $1.toString() << " members is " << $2.toString();
        //const auto jkl = $2.getSequence();
        std::vector< mysemantictype > s;
        s.push_back($1);
        s.push_back($2);
-       $$.m_sequence(s);
+       $$.setSequence( s );
        }
        ;
 
-atom: STRINGATOM | IDENT | SYMBOLATOM 
-	{
-	LOG(INFO) << $1.toString();
-	//LOG(INFO) << "string style atom " << yylval.m_id();
-	}
-	| PLUS | MINUS
-	{LOG(INFO) << $1.toString(); }
+atom: STRINGATOM 
+    {
+    //LOG(INFO) << $1.toString();
+    //LOG(INFO) << "string style atom " << yylval.m_id();
+        //$$ = StringAtom($1);
+    }
+    | IDENT 
+    {
+        //$$ = IdentifierAtom($1);
+    }
+    | SYMBOLATOM
+    {
+    	//$$ = SymbolAtom($1);
+    }
+    | PLUS | MINUS
+    {
+    //LOG(INFO) << $1.toString();
+    //$$ = Operator($1);
+    }
     | NUMBER
-	{LOG(INFO) << $1.toString(); }
-	;
+    {
+    //LOG(INFO) << $1.toString();
+    //$$ = Operator($1);
+    }
+    ;
