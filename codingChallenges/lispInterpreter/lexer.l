@@ -34,7 +34,7 @@ symbolatom {colon}{identifier}
 	return STRINGATOM;
 	}
 {symbolatom} {
-	yylval.m_id( strdup(yytext) );
+	yylval.setStringAtom( yytext );
 	//printf("found SYMBOLATOM %s\n", yylval.id);
 	return SYMBOLATOM;
 	}
@@ -53,12 +53,12 @@ symbolatom {colon}{identifier}
 	}
 [+] {
 	//printf("%ld: found PLUS\n", lineNumber);
-	yylval.setOperator(PLUS);
+	yylval.setOperator("+");
 	return PLUS;
 	}
 [-] {
 	//printf("%ld: found MINUS\n", lineNumber);
-	yylval.setOperator(MINUS);
+	yylval.setOperator("-");
 	return MINUS;
 	}
 [\n] {

@@ -43,6 +43,9 @@ members: sexpression
        {
 	LOG(INFO) 
        << "sexpression is " << $1.toString() << " members is " << $2.toString();
+       //const auto jkl = $2.getSequence();
+       std::vector< member > s;
+       $$.m_sequence(s);
        }
        ;
 
@@ -51,5 +54,5 @@ atom: STRINGATOM | IDENT | SYMBOLATOM
 	| PLUS | MINUS
 	{LOG(INFO) << "operator atom"; }
     | NUMBER
-	{printf("number atom %ld\n", yylval.m_num()); }
+	{LOG(INFO) << "number atom " << yylval.m_num(); }
 	;

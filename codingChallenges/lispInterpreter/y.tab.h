@@ -9,8 +9,21 @@ class member {
 };
 
 class Operator {
+	std::string m_value;
 public:
-	Operator(int) {}
+	Operator(const std::string& value) : m_value( value ) {}
+	const std::string& toString() const {
+		return m_value;
+	}
+};
+
+class StringAtom {
+	std::string m_value;
+public:
+	StringAtom(const std::string& val) { m_value = val; }
+	const std::string& toString() const {
+		return m_value;
+	}
 };
 
 /*
@@ -30,11 +43,13 @@ public:
 			[&r](auto&& arg){
 				using T = std::decay_t<decltype(arg)>;
 				if constexpr ( std::is_same_v< T, int > ) {
-					r = std::to_string( arg );
+					r = std::to_string( arg ) + " int";
 				} else if constexpr ( std::is_same_v< T, std::string > ) {
-					r = arg;
+					r = arg + " string";
+				} else if constexpr ( std::is_same_v< T, StringAtom > ) {
+					r = arg.toString() + " stringatom";
 				} else if constexpr ( std::is_same_v< T, Operator > ) {
-					r = "operator";
+					r = arg.toString() + " operator";
 				} else {
 					for (const auto& a : arg) {
 					}
@@ -60,13 +75,19 @@ public:
 	const std::vector< member >& m_sequence() const {
 		return std::get< std::vector< member > >(m_value);
 	};
+	const std::vector< member >& getSequence() const {
+		return m_sequence();
+	};
 	void m_sequence(const std::vector< member >& newValue) {
 		m_value = newValue;
 	};
-	void setOperator(const int newValue) {
+	void setOperator(const std::string& newValue) {
 		m_value = Operator(newValue);
 	};
-	std::variant< std::string, int, Operator, sequence > m_value;
+	void setStringAtom(const char* newValue) {
+		m_value = StringAtom(newValue);
+	};
+	std::variant< std::string, int, Operator, StringAtom, sequence > m_value;
 };
 
 #define YYSTYPE mysemantictype
