@@ -39,29 +39,28 @@ symbolatom {colon}{identifier}
 	return SYMBOLATOM;
 	}
 {lparen} {
-	printf("found BEGINEXPRESSION %s\n", yytext);
+	//printf("%ld: found BEGINEXPRESSION %s\n", lineNumber, yytext);
 	return BEGINEXPRESSION;
 	}
 {rparen} {
-	printf("found ENDEXPRESSION %s\n", yytext);
+	//printf("%ld: found ENDEXPRESSION %s\n", lineNumber, yytext);
 	return ENDEXPRESSION;
 	}
 {number} {
 	yylval.num = atoi(yytext);
-	printf("found number %d\n", yylval.num);
+	printf("%ld: found number %d\n", lineNumber, yylval.num);
 	return NUMBER;
 	}
 [+] {
-	printf("found PLUS\n");
+	printf("%ld: found PLUS\n", lineNumber);
 	return PLUS;
 	}
 [-] {
-	printf("found MINUS\n");
+	printf("%ld: found MINUS\n", lineNumber);
 	return MINUS;
 	}
 [\n] {
 	++lineNumber;
-	printf("incrementing line number to %ld\n", lineNumber);
 	}
 [ \t\r] {
 	printf("/* skip whitespace */\n");

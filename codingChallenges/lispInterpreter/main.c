@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "foo.h"
+//#include "foo.h"
+#include "lex.yy.h"
 
 
 //extern int yylex();

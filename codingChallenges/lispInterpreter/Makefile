@@ -1,19 +1,22 @@
 # added abseil with sudo apt install libabsl-dev
 ABSL_LINK_FLAGS=`pkg-config absl_log --libs-only-l`
 
+clean:
+	-rm -f *.o lex.yy.[ch] parser.tab.[ch]
+
 sayhello.o: sayhello.cpp
 	g++ -std=c++23 -g -O0 -c $< -ll
 
-lex.yy.c foo.h: lexer.l
-	flex --header-file=foo.h lexer.l
+lex.yy.c lex.yy.h: lexer.l
+	flex --header-file=lex.yy.h lexer.l
 
 parser.tab.c parser.tab.h: parser.y
 	bison -d parser.y
 
-parser.tab.o: parser.tab.c parser.tab.h
+parser.tab.o: parser.tab.c parser.tab.h lex.yy.h
 	gcc -g -O0 -c $< -ll
 
-main.o: main.c
+main.o: main.c lex.yy.h parser.tab.h
 	gcc -g -O0 -c $< -ll
 
 lex.yy.o: lex.yy.c parser.tab.h
@@ -25,10 +28,10 @@ parser: main.o lex.yy.o parser.tab.o sayhello.o
 lexer: lex.yy.c main.c
 	gcc -g -O0 -o lexer  lex.yy.c main.c -ll
 
-lex.yy.cc lex.yy.h: lexer.l
-	flex --c++ --header-file=lex.yy.h lexer.l
+lex.yy.cc lex.yy.hpp: lexer.l
+	flex --c++ --header-file=lex.yy.hpp lexer.l
 
-lexercpp: lex.yy.cc main.cpp lex.yy.h
+lexercpp: lex.yy.cc main.cpp lex.yy.hpp
 	g++ -g -O0 -o lexercpp  lex.yy.cc main.cpp -ll
 
 test: lexer
