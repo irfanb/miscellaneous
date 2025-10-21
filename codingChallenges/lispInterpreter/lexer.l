@@ -51,6 +51,14 @@ symbolatom {colon}{identifier}
 	printf("found number %d\n", yylval.num);
 	return NUMBER;
 	}
+[+] {
+	printf("found PLUS\n");
+	return PLUS;
+	}
+[-] {
+	printf("found MINUS\n");
+	return MINUS;
+	}
 [\n] {
 	++lineNumber;
 	printf("incrementing line number to %ld\n", lineNumber);

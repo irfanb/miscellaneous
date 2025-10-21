@@ -1,4 +1,8 @@
+# added abseil with sudo apt install libabsl-dev
+ABSL_LINK_FLAGS=`pkg-config absl_log --libs-only-l`
 
+sayhello.o: sayhello.cpp
+	g++ -std=c++23 -g -O0 -c $< -ll
 
 lex.yy.c foo.h: lexer.l
 	flex --header-file=foo.h lexer.l
@@ -15,8 +19,8 @@ main.o: main.c
 lex.yy.o: lex.yy.c parser.tab.h
 	gcc -g -O0 -c $< -ll
 
-parser: main.o lex.yy.o parser.tab.o
-	gcc -g -o parser main.o lex.yy.o parser.tab.o
+parser: main.o lex.yy.o parser.tab.o sayhello.o
+	gcc -g -o parser main.o lex.yy.o parser.tab.o sayhello.o $(ABSL_LINK_FLAGS) -lstdc++
 
 lexer: lex.yy.c main.c
 	gcc -g -O0 -o lexer  lex.yy.c main.c -ll

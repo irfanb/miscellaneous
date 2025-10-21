@@ -18,6 +18,6 @@ sexpression: BEGINEXPRESSION sexpressionelement ENDEXPRESSION
 	{printf("sexpression.\n");}
 	;
 
-sexpressionelement: STRINGATOM | IDENT
+sexpressionelement: STRINGATOM | IDENT | SYMBOLATOM | NUMBER | PLUS | MINUS
 	{printf("sexpressionelement\n");}
 	;
