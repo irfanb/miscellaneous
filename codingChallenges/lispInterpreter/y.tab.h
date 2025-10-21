@@ -5,9 +5,6 @@
 #include <variant>
 #include <type_traits>
 
-class member {
-};
-
 class Operator {
 	std::string m_value;
 public:
