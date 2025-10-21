@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <string>
 
 class member {
 };
@@ -15,7 +16,7 @@ typedef union {
 
 class mysemantictype {
 public:
-	const char* m_id;
+	std::string m_id;
 	int m_num;
 	std::vector< member > m_sequence;
 	class member m_member;
