@@ -52,9 +52,12 @@ members: sexpression
        ;
 
 atom: STRINGATOM | IDENT | SYMBOLATOM 
-	{LOG(INFO) << "string style atom " << yylval.m_id(); }
+	{
+	LOG(INFO) << $1.toString();
+	//LOG(INFO) << "string style atom " << yylval.m_id();
+	}
 	| PLUS | MINUS
-	{LOG(INFO) << "operator atom"; }
+	{LOG(INFO) << $1.toString(); }
     | NUMBER
-	{LOG(INFO) << "number atom " << yylval.m_num(); }
+	{LOG(INFO) << $1.toString(); }
 	;
