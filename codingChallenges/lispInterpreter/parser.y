@@ -2,7 +2,7 @@
   /* This is the prologue section. This code goes
   on the top of the parser implementation file. */
   #include <stdio.h>
-  extern int yyerror(char *message);
+  extern int yyerror(const char *message);
   extern int yylex(void);
 #include "y.tab.h"
 %}
@@ -21,7 +21,8 @@ sexpression:
 	   ;
 
 expression: BEGINEXPRESSION ENDEXPRESSION
-	  { printf("empty list"); }
+	  { printf("empty list");
+	    }
 	  | BEGINEXPRESSION members ENDEXPRESSION
 	  { printf("non empty list"); }
 	  ;
@@ -29,5 +30,6 @@ expression: BEGINEXPRESSION ENDEXPRESSION
 members: sexpression | sexpression members;
 
 atom: STRINGATOM | IDENT | SYMBOLATOM | NUMBER | PLUS | MINUS
-	{printf("atom\n");}
+	{printf("atom\n");
+	}
 	;

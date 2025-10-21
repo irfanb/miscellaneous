@@ -14,13 +14,13 @@ parser.tab.c parser.tab.h: parser.y
 	bison -d parser.y
 
 parser.tab.o: parser.tab.c parser.tab.h lex.yy.h
-	gcc -g -O0 -c $< -ll
+	g++ -std=c++23 -g -O0 -c $< -ll
 
 main.o: main.c lex.yy.h parser.tab.h
-	gcc -g -O0 -c $< -ll
+	g++ -std=c++23 -g -O0 -c $< -ll
 
 lex.yy.o: lex.yy.c parser.tab.h
-	gcc -g -O0 -c $< -ll
+	g++ -std=c++23 -g -O0 -c $< -ll
 
 parser: main.o lex.yy.o parser.tab.o sayhello.o
 	gcc -g -o parser main.o lex.yy.o parser.tab.o sayhello.o $(ABSL_LINK_FLAGS) -lstdc++
