@@ -53,10 +53,12 @@ symbolatom {colon}{identifier}
 	}
 [+] {
 	//printf("%ld: found PLUS\n", lineNumber);
+	yylval.setOperator(PLUS);
 	return PLUS;
 	}
 [-] {
 	//printf("%ld: found MINUS\n", lineNumber);
+	yylval.setOperator(MINUS);
 	return MINUS;
 	}
 [\n] {

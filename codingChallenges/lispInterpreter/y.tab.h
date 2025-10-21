@@ -8,6 +8,11 @@
 class member {
 };
 
+class Operator {
+public:
+	Operator(int) {}
+};
+
 /*
 typedef union {
 	const char* id;
@@ -28,6 +33,8 @@ public:
 					r = std::to_string( arg );
 				} else if constexpr ( std::is_same_v< T, std::string > ) {
 					r = arg;
+				} else if constexpr ( std::is_same_v< T, Operator > ) {
+					r = "operator";
 				} else {
 					for (const auto& a : arg) {
 					}
@@ -56,7 +63,10 @@ public:
 	void m_sequence(const std::vector< member >& newValue) {
 		m_value = newValue;
 	};
-	std::variant< std::string, int, sequence > m_value;
+	void setOperator(const int newValue) {
+		m_value = Operator(newValue);
+	};
+	std::variant< std::string, int, Operator, sequence > m_value;
 };
 
 #define YYSTYPE mysemantictype

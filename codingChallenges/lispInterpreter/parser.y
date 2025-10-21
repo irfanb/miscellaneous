@@ -49,7 +49,7 @@ members: sexpression
 atom: STRINGATOM | IDENT | SYMBOLATOM 
 	{LOG(INFO) << "string style atom " << yylval.m_id(); }
 	| PLUS | MINUS
-	{printf("operator atom\n"); }
+	{LOG(INFO) << "operator atom"; }
     | NUMBER
 	{printf("number atom %ld\n", yylval.m_num()); }
 	;
