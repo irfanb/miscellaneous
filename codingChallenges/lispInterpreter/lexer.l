@@ -63,7 +63,7 @@ symbolatom {colon}{identifier}
 	++lineNumber;
 	}
 [ \t\r] {
-	printf("/* skip whitespace */\n");
+	//printf("/* skip whitespace */\n");
 	}
 .                    { printf("Unknown character [%c]\n",yytext[0]);
                        return UNKNOWN;    }

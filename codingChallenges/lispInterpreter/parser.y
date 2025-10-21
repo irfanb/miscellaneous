@@ -12,11 +12,17 @@
  
 %%
 /* Grammar rules */
-sexpressionlist: sexpressionlist sexpression | sexpression;
+sexpressionlist: sexpressionlist sexpression | sexpression
+	{printf("sexpressionlist\n");}
+	       ;
 
-sexpression: BEGINEXPRESSION sexpressionelement ENDEXPRESSION
-	{printf("sexpression.\n");}
+sexpression: BEGINEXPRESSION sexpressionelementlist ENDEXPRESSION
+	{printf("sexpression\n");}
 	;
+
+sexpressionelementlist: sexpressionelementlist sexpressionelement | sexpressionelement
+	{printf("sexpressionelementlist\n");}
+		      ;
 
 sexpressionelement: STRINGATOM | IDENT | SYMBOLATOM | NUMBER | PLUS | MINUS
 	{printf("sexpressionelement\n");}

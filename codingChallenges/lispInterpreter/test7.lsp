@@ -4,3 +4,4 @@
 (-)
 (927498928)
 (:thisIsASymbolAtom)
+(+ 1 2)
