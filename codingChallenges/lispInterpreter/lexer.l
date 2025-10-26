@@ -24,7 +24,7 @@ symbolatom {colon}{identifier}
 
 %%
 {identifier} {
-	yylval.m_id( IdentifierAtom( strdup(yytext) ) );
+	yylval.setIdentifierAtom( IdentifierAtom( strdup(yytext) ) );
 	//printf("%ld: found id %s\n", lineNumber, yylval.id);
 	return IDENT;
 	}
@@ -47,7 +47,7 @@ symbolatom {colon}{identifier}
 	return ENDEXPRESSION;
 	}
 {number} {
-	yylval.m_num( atoi(yytext) );
+	yylval.setNumberAtom( std::string( yytext ) );
 	//printf("%ld: found number %d\n", lineNumber, yylval.num);
 	return NUMBER;
 	}
