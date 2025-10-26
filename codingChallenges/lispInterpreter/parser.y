@@ -26,7 +26,7 @@ sexpression:
        }
        | atom
        {
-       //LOG(INFO) << "atom " << $1.toString();
+       LOG(INFO) << "atom " << $1.toString();
        $$ = $1;
        }
        ;
@@ -66,27 +66,27 @@ members: sexpression
 
 atom: STRINGATOM 
     {
-	LOG(INFO) << $1.toString();
+	//LOG(INFO) << $1.toString();
 	//LOG(INFO) << "string style atom " << yylval.m_id();
 	//$$ = StringAtom($1);
     }
     | IDENT 
     {
-	LOG(INFO) << $1.toString();
+	//LOG(INFO) << $1.toString();
         //$$ = IdentifierAtom($1);
     }
     | SYMBOLATOM
     {
-	LOG(INFO) << $1.toString();
+	//LOG(INFO) << $1.toString();
     	//$$ = SymbolAtom($1);
     }
     | PLUS | MINUS
     {
-	LOG(INFO) << $1.toString();
+	//LOG(INFO) << $1.toString();
 	//$$ = Operator($1);
     }
     | NUMBER
     {
-	LOG(INFO) << $1.toString();
+	//LOG(INFO) << $1.toString();
     }
     ;
