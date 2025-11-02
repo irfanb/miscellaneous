@@ -10,6 +10,9 @@
 #include "absl/log/log.h"
 #include "absl/log/check.h"
 
+extern size_t lineNumber;
+#define MYLOG 	LOG(INFO) << "line " << lineNumber << ": "
+
 %}
  
 /* Declarations of terminals */
@@ -21,8 +24,8 @@
 sexpression:
        expression
        {
+       MYLOG << " expression ( " << $1.toString() << " )";
        $$ = $1;
-       //LOG(INFO) << "( " << $$.toString() << " )";
        }
        | atom
        {
@@ -34,33 +37,33 @@ sexpression:
 expression:
     BEGINEXPRESSION ENDEXPRESSION
     {
-        //$$.m_sequence( std::vector<mysemantictype>() );
-    mysemantictype emptySemanticType;
-    emptySemanticType.setEmptySequence();
-        //LOG(INFO) << "emptySemanticType is " << emptySemanticType.toString();
-        $$ = emptySemanticType;
+	mysemantictype emptySemanticType;
+	emptySemanticType.setEmptySequence();
+	LOG(INFO) << "emptySemanticType is " << emptySemanticType.toString();
+	$$ = emptySemanticType;
     }
     |
     BEGINEXPRESSION members ENDEXPRESSION
     {
-        //LOG(INFO) << "members is " << $1.toString();
-        $$ = $1;
+        LOG(INFO) << "members is " << $2.toString();
+        //LOG(INFO) << "$2 is " << $2.toString();
+        $$ = $2;
     }
     ;
 
-members: sexpression
+members: sexpression members
        {
-       //LOG(INFO) << "sexpression is " << $1.toString();
-       $$ = $1;
-       }
-       | sexpression members
-       {
-       //LOG(INFO) << "sexpression is " << $1.toString() << " members is " << $2.toString();
+       MYLOG << "sexpression is '" << $1.toString() << "' members is '" << $2.toString();
        //const auto jkl = $2.getSequence();
        std::vector< mysemantictype > s;
        s.push_back($1);
        s.push_back($2);
        $$.setSequence( s );
+       }
+       | sexpression
+       {
+       MYLOG << "sexpression is '" << $1.toString() << "'";
+       $$ = $1;
        }
        ;
 
