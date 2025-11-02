@@ -12,15 +12,21 @@
 
 extern size_t lineNumber;
 #define MYLOG 	LOG(INFO) << "line " << lineNumber << ": "
-
 %}
  
 /* Declarations of terminals */
 %token  PLUS MINUS TIMES FORWARDSLASH SEMICOLON COMMA PERIOD EQUAL NOTEQUAL LESSTHAN GREATERTHAN LEQ GEQ IDENT NUMBER UNKNOWN STRINGATOM SYMBOLATOM BEGINEXPRESSION ENDEXPRESSION
+%start program
  
 %%
 /* Grammar rules */
 
+program: sexpression
+       {
+       MYLOG << " " << $1.toString();
+       MYLOG << " " << $$.toString();
+       }
+       ;
 sexpression:
        expression
        {
@@ -29,41 +35,34 @@ sexpression:
        }
        | atom
        {
-       LOG(INFO) << "atom " << $1.toString();
+       MYLOG << "atom " << $1.toString();
        $$ = $1;
        }
        ;
 
 expression:
-    BEGINEXPRESSION ENDEXPRESSION
-    {
-	mysemantictype emptySemanticType;
-	emptySemanticType.setEmptySequence();
-	LOG(INFO) << "emptySemanticType is " << emptySemanticType.toString();
-	$$ = emptySemanticType;
-    }
-    |
     BEGINEXPRESSION members ENDEXPRESSION
     {
-        LOG(INFO) << "members is " << $2.toString();
-        //LOG(INFO) << "$2 is " << $2.toString();
         $$ = $2;
+       MYLOG << " ( " << $2.toString() << " )";
     }
     ;
 
-members: sexpression members
+members:
+       /* empty */
        {
-       MYLOG << "sexpression is '" << $1.toString() << "' members is '" << $2.toString();
-       //const auto jkl = $2.getSequence();
+	mysemantictype emptySemanticType;
+	emptySemanticType.setNull();
+	//MYLOG << "emptySemanticType is " << emptySemanticType.toString();
+	$$ = emptySemanticType;
+       }
+       | members sexpression
+       {
+       MYLOG << "members is '" << $1.toString() << "' sexpression is '" << $2.toString() << '\'';
        std::vector< mysemantictype > s;
        s.push_back($1);
        s.push_back($2);
        $$.setSequence( s );
-       }
-       | sexpression
-       {
-       MYLOG << "sexpression is '" << $1.toString() << "'";
-       $$ = $1;
        }
        ;
 
@@ -91,5 +90,6 @@ atom: STRINGATOM
     | NUMBER
     {
 	//LOG(INFO) << $1.toString();
+	$$ = $1;
     }
     ;

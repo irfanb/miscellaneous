@@ -14,6 +14,15 @@ public:
     }
 };
 
+class Null {
+protected:
+public:
+    Null() {}
+    virtual const std::string toString() const {
+        return "";
+    }
+};
+
 class NumberAtom {
 protected:
     int m_value;
@@ -70,6 +79,8 @@ public:
                     r = "";
 		} else if constexpr ( std::is_same_v< T, NumberAtom > ) {
                     r = arg.toString();
+		} else if constexpr ( std::is_same_v< T, Null > ) {
+                    r = arg.toString();
                 } else if constexpr ( std::is_same_v< T, IdentifierAtom > ) {
                     r = arg.toString();
                 } else if constexpr ( std::is_same_v< T, SymbolAtom > ) {
@@ -82,8 +93,8 @@ public:
                     for (const auto& a : arg) {
                         r+= a.toString();
                     }
-                    r += "members of size ";
-                    r += std::to_string( arg.size() );
+                    //r += "members of size ";
+                    //r += std::to_string( arg.size() );
                 }
                 };
         std::visit(valueToString, m_value);
@@ -107,6 +118,9 @@ public:
     void setNumberAtom( const NumberAtom& newValue ) {
         m_value = newValue;
     };
+    void setNull( ) {
+        m_value = Null();
+    };
     const std::vector< mysemantictype >& m_sequence() const {
         return std::get< std::vector< mysemantictype > >(m_value);
     };
@@ -125,7 +139,7 @@ public:
     void setStringAtom(const char* newValue) {
         m_value = StringAtom(newValue);
     };
-    std::variant< NumberAtom, Operator, IdentifierAtom, SymbolAtom, StringAtom, std::vector< mysemantictype> > m_value;
+    std::variant< Null, NumberAtom, Operator, IdentifierAtom, SymbolAtom, StringAtom, std::vector< mysemantictype> > m_value;
 };
 
 #define YYSTYPE mysemantictype
