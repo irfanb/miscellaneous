@@ -19,7 +19,7 @@ protected:
 public:
     Null() {}
     virtual const std::string toString() const {
-        return "";
+        return "NullThing ";
     }
 };
 
@@ -70,6 +70,7 @@ typedef union {
 
 class mysemantictype {
 public:
+    using Sequence = std::vector< mysemantictype >;
     std::string toString() const {
         std::string r;
         const auto valueToString =
@@ -89,13 +90,17 @@ public:
                     r = arg.toString();
                 } else if constexpr ( std::is_same_v< T, Operator > ) {
                     r = arg.toString();
-                } else {
+                } else if constexpr ( std::is_same_v< T, Sequence > ) {
+			r+= "(";
                     for (const auto& a : arg) {
                         r+= a.toString();
                     }
+			r+= ")";
                     //r += "members of size ";
                     //r += std::to_string( arg.size() );
-                }
+                } else {
+			r+= "plop";
+		}
                 };
         std::visit(valueToString, m_value);
         return r;
@@ -121,11 +126,8 @@ public:
     void setNull( ) {
         m_value = Null();
     };
-    const std::vector< mysemantictype >& m_sequence() const {
-        return std::get< std::vector< mysemantictype > >(m_value);
-    };
     const std::vector< mysemantictype >& getSequence() const {
-        return m_sequence();
+        return std::get< std::vector< mysemantictype > >(m_value);
     };
     void setSequence(const std::vector< mysemantictype >& newValue) {
         m_value = newValue;

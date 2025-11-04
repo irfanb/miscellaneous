@@ -13,7 +13,7 @@ lex.yy.c lex.yy.h: lexer.l
 parser.tab.c parser.tab.h: parser.y
 	bison -d parser.y
 
-parser.tab.o: parser.tab.c parser.tab.h lex.yy.h
+parser.tab.o: parser.tab.c parser.tab.h lex.yy.h y.tab.h
 	g++ -std=c++23 -g -O0 -c $< -ll
 
 main.o: main.c lex.yy.h parser.tab.h
