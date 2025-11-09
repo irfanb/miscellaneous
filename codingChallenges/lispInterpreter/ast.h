@@ -8,56 +8,44 @@
 class Operator {
     std::string m_value;
 public:
-    Operator(const std::string& value) : m_value( value ) {}
-    const std::string toString() const {
-        return std::string("OperatorAtom ") + m_value;
-    }
+    Operator(const std::string& value);
+    const std::string toString() const;
 };
 
 class Null {
 protected:
 public:
-    Null() {}
-    virtual const std::string toString() const {
-        return "NullThing ";
-    }
+    Null();
+    virtual const std::string toString() const;
 };
 
 class NumberAtom {
 protected:
     int m_value;
 public:
-    NumberAtom() { m_value = 0; }
-    NumberAtom(const std::string& val) { m_value = std::stoi(val); }
-    virtual const std::string toString() const {
-        return std::string("NumberAtom ") + std::to_string( m_value );
-    }
+    NumberAtom();
+    NumberAtom(const std::string& val);
+    virtual const std::string toString() const;
 };
 
 class StringAtom {
 protected:
     std::string m_value;
 public:
-    StringAtom(const std::string& val) { m_value = val; }
-    virtual const std::string toString() const {
-        return std::string("StringAtom ") + m_value;
-    }
+    StringAtom(const std::string& val);
+    virtual const std::string toString() const;
 };
 
 class IdentifierAtom : public StringAtom {
 public:
-    IdentifierAtom(const std::string& val) : StringAtom(val) {}
-    const std::string toString() const override {
-        return std::string("IdentifierAtom ") + m_value;
-    }
+    IdentifierAtom(const std::string& val);
+    const std::string toString() const override;
 };
 
 class SymbolAtom : public StringAtom {
 public:
-    SymbolAtom(const std::string& val) : StringAtom(val) {}
-    const std::string toString() const override {
-        return std::string("SymbolAtom ") + std::string(":") + m_value;
-    }
+    SymbolAtom(const std::string& val);
+    const std::string toString() const override;
 };
 
 /*
