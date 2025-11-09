@@ -1,7 +1,7 @@
 #include <stdio.h>
 //#include "foo.h"
 #include "lex.yy.h"
-#include "y.tab.h"
+#include "ast.h"
 #include <iostream>
 #include "absl/log/log.h"
 

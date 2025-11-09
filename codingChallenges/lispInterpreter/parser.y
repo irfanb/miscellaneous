@@ -5,7 +5,7 @@
   extern int yyerror(const char *message);
   extern int yylex(void);
 #include <iostream>
-#include "y.tab.h"
+#include "ast.h"
 
 #include "absl/log/log.h"
 #include "absl/log/check.h"

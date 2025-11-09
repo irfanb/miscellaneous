@@ -1,6 +1,6 @@
 %top{
   /* This goes at the top of the generated file */
-#include "y.tab.h"
+#include "ast.h"
   #include "parser.tab.h"
 }
 %{
