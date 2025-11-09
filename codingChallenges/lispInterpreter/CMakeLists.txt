@@ -7,6 +7,7 @@ find_package(absl REQUIRED)
 
 SET_SOURCE_FILES_PROPERTIES( main.c PROPERTIES LANGUAGE CXX )
 SET_SOURCE_FILES_PROPERTIES( lex.yy.c PROPERTIES LANGUAGE CXX )
+SET_SOURCE_FILES_PROPERTIES( parser.tab.c PROPERTIES LANGUAGE CXX )
 
-add_executable(lisp main.c sayhello.cpp lex.yy.c )
+add_executable(lisp main.c sayhello.cpp lex.yy.c parser.tab.c )
 target_link_libraries( lisp absl::log )
