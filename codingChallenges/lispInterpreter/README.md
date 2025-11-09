@@ -1,2 +1,2 @@
-  118  2025/11/09 13:35:57 cmake -B bin -D CMAKE_BUILD_TYPE=Debug
-  119  2025/11/09 13:36:01 cmake --build bin
+  221  2025/11/09 14:35:50 cmake -B bin -D CMAKE_BUILD_TYPE=Debug && cmake --build bin 
+  222  2025/11/09 14:36:08 cmake -B bin -D CMAKE_BUILD_TYPE=Debug && cmake --build bin -t clean
