@@ -3,6 +3,8 @@ project(lisp)
 
 set(CMAKE_CXX_STANDARD 23)
 
+include(CMakePrintHelpers)
+
 find_package(absl REQUIRED)
 FIND_PACKAGE(BISON REQUIRED)
 FIND_PACKAGE(FLEX REQUIRED)
@@ -20,3 +22,5 @@ SET_SOURCE_FILES_PROPERTIES( parser.tab.c PROPERTIES LANGUAGE CXX )
 add_executable(lisp main.c sayhello.cpp lex.yy.c ast.cpp ${BISON_MyParser_OUTPUTS} ${FLEX_MyLexer_OUTPUTS}  )
 target_link_libraries( lisp absl::log )
 target_include_directories( lisp PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
+
+add_subdirectory(tests)
