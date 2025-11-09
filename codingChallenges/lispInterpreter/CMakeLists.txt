@@ -7,15 +7,16 @@ find_package(absl REQUIRED)
 FIND_PACKAGE(BISON REQUIRED)
 FIND_PACKAGE(FLEX REQUIRED)
 
-BISON_TARGET(MyParser parser.y ${CMAKE_CURRENT_SOURCE_DIR}/parser.tab.c
-	DEFINES_FILE ${CMAKE_CURRENT_SOURCE_DIR}/parser.tab.h)
+BISON_TARGET(MyParser parser.y ${CMAKE_CURRENT_BINARY_DIR}/parser.tab.c
+	DEFINES_FILE ${CMAKE_CURRENT_BINARY_DIR}/parser.tab.h)
 
-FLEX_TARGET(MyLexer lexer.l ${CMAKE_CURRENT_SOURCE_DIR}/lex.yy.c
-	DEFINES_FILE ${CMAKE_CURRENT_SOURCE_DIR}/lex.yy.h)
+FLEX_TARGET(MyLexer lexer.l ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.c
+	DEFINES_FILE ${CMAKE_CURRENT_BINARY_DIR}/lex.yy.h)
 
 SET_SOURCE_FILES_PROPERTIES( main.c PROPERTIES LANGUAGE CXX )
 SET_SOURCE_FILES_PROPERTIES( lex.yy.c PROPERTIES LANGUAGE CXX )
 SET_SOURCE_FILES_PROPERTIES( parser.tab.c PROPERTIES LANGUAGE CXX )
 
-add_executable(lisp main.c sayhello.cpp lex.yy.c parser.tab.c ast.cpp)
+add_executable(lisp main.c sayhello.cpp lex.yy.c ast.cpp ${BISON_MyParser_OUTPUTS} ${FLEX_MyLexer_OUTPUTS}  )
 target_link_libraries( lisp absl::log )
+target_include_directories( lisp PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
