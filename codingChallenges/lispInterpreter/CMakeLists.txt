@@ -23,4 +23,7 @@ add_executable(lisp main.c sayhello.cpp lex.yy.c ast.cpp ${BISON_MyParser_OUTPUT
 target_link_libraries( lisp absl::log )
 target_include_directories( lisp PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
+# enable testing functionality
+enable_testing()
+
 add_subdirectory(tests)
