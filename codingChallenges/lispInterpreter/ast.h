@@ -1,14 +1,15 @@
 #pragma once
 
-#include <vector>
 #include <string>
-#include <variant>
 #include <type_traits>
+#include <variant>
+#include <vector>
 
 class Operator {
     std::string m_value;
+
 public:
-    Operator(const std::string& value);
+    Operator( const std::string &value );
     const std::string toString() const;
 };
 
@@ -22,29 +23,31 @@ public:
 class NumberAtom {
 protected:
     int m_value;
+
 public:
     NumberAtom();
-    NumberAtom(const std::string& val);
+    NumberAtom( const std::string &val );
     virtual const std::string toString() const;
 };
 
 class StringAtom {
 protected:
     std::string m_value;
+
 public:
-    StringAtom(const std::string& val);
+    StringAtom( const std::string &val );
     virtual const std::string toString() const;
 };
 
 class IdentifierAtom : public StringAtom {
 public:
-    IdentifierAtom(const std::string& val);
+    IdentifierAtom( const std::string &val );
     const std::string toString() const override;
 };
 
 class SymbolAtom : public StringAtom {
 public:
-    SymbolAtom(const std::string& val);
+    SymbolAtom( const std::string &val );
     const std::string toString() const override;
 };
 
@@ -58,78 +61,71 @@ typedef union {
 
 class mysemantictype {
 public:
-    using Sequence = std::vector< mysemantictype >;
+    using Sequence = std::vector<mysemantictype>;
     std::string toString() const {
         std::string r;
-        const auto valueToString =
-            [&r](auto&& arg){
-                using T = std::decay_t<decltype(arg)>;
-                if constexpr ( std::is_same_v< T, int > ) {
-                    r = "";
-		} else if constexpr ( std::is_same_v< T, NumberAtom > ) {
-                    r = arg.toString();
-		} else if constexpr ( std::is_same_v< T, Null > ) {
-                    r = arg.toString();
-                } else if constexpr ( std::is_same_v< T, IdentifierAtom > ) {
-                    r = arg.toString();
-                } else if constexpr ( std::is_same_v< T, SymbolAtom > ) {
-                    r = arg.toString();
-                } else if constexpr ( std::is_same_v< T, StringAtom > ) {
-                    r = arg.toString();
-                } else if constexpr ( std::is_same_v< T, Operator > ) {
-                    r = arg.toString();
-                } else if constexpr ( std::is_same_v< T, Sequence > ) {
-			r+= "(";
-                    for (const auto& a : arg) {
-                        r+= a.toString();
-                    }
-			r+= ")";
-                    //r += "members of size ";
-                    //r += std::to_string( arg.size() );
-                } else {
-			r+= "plop";
-		}
-                };
-        std::visit(valueToString, m_value);
+        const auto valueToString = [&r]( auto &&arg ) {
+            using T = std::decay_t<decltype( arg )>;
+            if constexpr ( std::is_same_v<T, int> ) {
+                r = "";
+            } else if constexpr ( std::is_same_v<T, NumberAtom> ) {
+                r = arg.toString();
+            } else if constexpr ( std::is_same_v<T, Null> ) {
+                r = arg.toString();
+            } else if constexpr ( std::is_same_v<T, IdentifierAtom> ) {
+                r = arg.toString();
+            } else if constexpr ( std::is_same_v<T, SymbolAtom> ) {
+                r = arg.toString();
+            } else if constexpr ( std::is_same_v<T, StringAtom> ) {
+                r = arg.toString();
+            } else if constexpr ( std::is_same_v<T, Operator> ) {
+                r = arg.toString();
+            } else if constexpr ( std::is_same_v<T, Sequence> ) {
+                r += "(";
+                for ( const auto &a : arg ) {
+                    r += a.toString();
+                }
+                r += ")";
+                // r += "members of size ";
+                // r += std::to_string( arg.size() );
+            } else {
+                r += "plop";
+            }
+        };
+        std::visit( valueToString, m_value );
         return r;
     }
-    const IdentifierAtom& getIdentifierAtom() const {
-        return std::get<IdentifierAtom>(m_value);
+    const IdentifierAtom &getIdentifierAtom() const {
+        return std::get<IdentifierAtom>( m_value );
     };
-    void setIdentifierAtom(const IdentifierAtom& newValue) {
+    void setIdentifierAtom( const IdentifierAtom &newValue ) {
         m_value = newValue;
     };
-    const SymbolAtom& getSymbolAtom() const {
-        return std::get<SymbolAtom>(m_value);
+    const SymbolAtom &getSymbolAtom() const {
+        return std::get<SymbolAtom>( m_value );
     };
-    void setSymbolAtom(const SymbolAtom& newValue) {
+    void setSymbolAtom( const SymbolAtom &newValue ) { m_value = newValue; };
+    const NumberAtom &getNumberAtom() const {
+        return std::get<NumberAtom>( m_value );
+    };
+    void setNumberAtom( const NumberAtom &newValue ) { m_value = newValue; };
+    void setNull() { m_value = Null(); };
+    const std::vector<mysemantictype> &getSequence() const {
+        return std::get<std::vector<mysemantictype>>( m_value );
+    };
+    void setSequence( const std::vector<mysemantictype> &newValue ) {
         m_value = newValue;
     };
-    const NumberAtom& getNumberAtom() const {
-        return std::get<NumberAtom>(m_value);
+    void setEmptySequence() { m_value = std::vector<mysemantictype>(); }
+    void setOperator( const std::string &newValue ) {
+        m_value = Operator( newValue );
     };
-    void setNumberAtom( const NumberAtom& newValue ) {
-        m_value = newValue;
+    void setStringAtom( const char *newValue ) {
+        m_value = StringAtom( newValue );
     };
-    void setNull( ) {
-        m_value = Null();
-    };
-    const std::vector< mysemantictype >& getSequence() const {
-        return std::get< std::vector< mysemantictype > >(m_value);
-    };
-    void setSequence(const std::vector< mysemantictype >& newValue) {
-        m_value = newValue;
-    };
-    void setEmptySequence() {
-        m_value = std::vector< mysemantictype >();
-    }
-    void setOperator(const std::string& newValue) {
-        m_value = Operator(newValue);
-    };
-    void setStringAtom(const char* newValue) {
-        m_value = StringAtom(newValue);
-    };
-    std::variant< Null, NumberAtom, Operator, IdentifierAtom, SymbolAtom, StringAtom, std::vector< mysemantictype> > m_value;
+    std::variant<Null, NumberAtom, Operator, IdentifierAtom, SymbolAtom,
+                 StringAtom, std::vector<mysemantictype>>
+        m_value;
 };
 
 #define YYSTYPE mysemantictype
