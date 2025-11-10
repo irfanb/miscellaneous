@@ -1,9 +1,7 @@
 #include <stdio.h>
-// #include "foo.h"
 #include "absl/log/log.h"
 #include "ast.h"
 #include "lex.yy.h"
-#include <iostream>
 
 // extern int yylex();
 extern int yyparse( void );
@@ -15,7 +13,11 @@ void yyerror( char const *message ) {
 void sayhello();
 
 int main( int argc, char *argv[] ) {
-    yyin = stdin;
+	if (argc > 1) {
+		LOG(INFO) <<"input file is "<< argv[1];
+	} else {
+	    yyin = stdin;
+	}
     int result_code = yyparse();
     extern YYSTYPE yyval;
     LOG( INFO ) << yylval.toString();
