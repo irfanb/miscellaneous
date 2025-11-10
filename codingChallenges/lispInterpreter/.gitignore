@@ -3,3 +3,5 @@ lex.yy.cc
 *.o
 *.actual
 parser.tab.[ch]
+bin
+gdb.txt

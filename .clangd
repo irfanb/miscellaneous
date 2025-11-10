@@ -1,0 +1,5 @@
+CompileFlags:
+  Add: [ -I/home/irfan/githome/repo1/testgit/./.build/_deps/poco-src/Foundation/include, -DQT_NO_VERSION_TAGGING, -I/usr/include/x86_64-linux-gnu/qt5, -I/usr/include/x86_64-linux-gnu/qt5/QtCore ]
+  Compiler: g++
+
+
