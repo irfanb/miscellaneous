@@ -2,6 +2,7 @@
 #include "absl/log/log.h"
 #include "ast.h"
 #include "lex.yy.h"
+#include "parser.tab.h"
 
 // extern int yylex();
 extern int yyparse( void );

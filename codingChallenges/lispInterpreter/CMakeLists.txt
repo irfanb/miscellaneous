@@ -19,7 +19,8 @@ SET_SOURCE_FILES_PROPERTIES( main.c PROPERTIES LANGUAGE CXX )
 SET_SOURCE_FILES_PROPERTIES( lex.yy.c PROPERTIES LANGUAGE CXX )
 SET_SOURCE_FILES_PROPERTIES( parser.tab.c PROPERTIES LANGUAGE CXX )
 
-add_executable(lisp main.c sayhello.cpp lex.yy.c ast.cpp ${BISON_MyParser_OUTPUTS} ${FLEX_MyLexer_OUTPUTS}  )
+cmake_print_variables( BISON_MyParser_OUTPUTS FLEX_MyLexer_OUTPUTS )
+add_executable(lisp main.c sayhello.cpp ast.cpp ${BISON_MyParser_OUTPUTS} ${FLEX_MyLexer_OUTPUTS}  )
 target_link_libraries( lisp absl::log )
 target_include_directories( lisp PRIVATE ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} )
 
