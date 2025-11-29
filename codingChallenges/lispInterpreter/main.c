@@ -14,8 +14,10 @@ void yyerror( char const *message ) {
 void sayhello();
 
 int main( int argc, char *argv[] ) {
+	bool fileOpened = true;
 	if (argc > 1) {
 		LOG(INFO) <<"input file is "<< argv[1];
+		yyin = fopen(argv[1], "r");
 	} else {
 	    yyin = stdin;
 	}
@@ -23,5 +25,6 @@ int main( int argc, char *argv[] ) {
     extern YYSTYPE yyval;
     LOG( INFO ) << yylval.toString();
     sayhello();
+    if ( fileOpened ) fclose( yyin );
     return result_code;
 }
