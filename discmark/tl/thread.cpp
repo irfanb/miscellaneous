@@ -19,6 +19,7 @@ void* Thread::ThreadFunction(void *pThreadObject)
     Thread* pThread = reinterpret_cast<Thread*>(pThreadObject);
     pthread_setspecific(s_ThreadKey, pThread);
     pThread->run();
+    return nullptr;
 }
 void Thread::create(void)
 {
