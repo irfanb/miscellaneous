@@ -4,6 +4,7 @@
 #include <type_traits>
 #include <variant>
 #include <vector>
+#include "absl/log/log.h"
 
 class Operator {
     std::string m_value;
@@ -60,11 +61,18 @@ typedef union {
 */
 
 class mysemantictype {
+    bool m_isList = false;
 public:
+    mysemantictype() {
+	    //LOG(INFO) <<("default constructor invoked");
+    }
+    mysemantictype(const mysemantictype& copyMe) : m_isList( copyMe.m_isList ), m_value( copyMe.m_value ) {
+	//LOG( INFO ) << "copy constructor invoked address of copyMe is " << &copyMe << " and string representation is " << copyMe.toString();
+    }
     using Sequence = std::vector<mysemantictype>;
     std::string toString() const {
         std::string r;
-        const auto valueToString = [&r]( auto &&arg ) {
+        const auto valueToString = [this, &r]( auto &&arg ) {
             using T = std::decay_t<decltype( arg )>;
             if constexpr ( std::is_same_v<T, int> ) {
                 r = "";
@@ -81,11 +89,11 @@ public:
             } else if constexpr ( std::is_same_v<T, Operator> ) {
                 r = arg.toString();
             } else if constexpr ( std::is_same_v<T, Sequence> ) {
-                r += "(";
+		    if (m_isList) r+= "(";
                 for ( const auto &a : arg ) {
                     r += a.toString();
                 }
-                r += ")";
+		    if (m_isList) r+= ")";
                 // r += "members of size ";
                 // r += std::to_string( arg.size() );
             } else {
@@ -115,6 +123,10 @@ public:
     };
     void setSequence( const std::vector<mysemantictype> &newValue ) {
         m_value = newValue;
+    };
+    void setList( const std::vector<mysemantictype> &newValue ) {
+        m_value = newValue;
+	m_isList = true;
     };
     void setEmptySequence() { m_value = std::vector<mysemantictype>(); }
     void setOperator( const std::string &newValue ) {

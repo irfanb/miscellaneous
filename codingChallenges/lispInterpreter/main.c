@@ -22,9 +22,9 @@ int main( int argc, char *argv[] ) {
 	    yyin = stdin;
 	}
     int result_code = yyparse();
-    extern YYSTYPE yyval;
-    LOG( INFO ) << yylval.toString();
-    sayhello();
     if ( fileOpened ) fclose( yyin );
+    extern YYSTYPE parseResult;
+    LOG( INFO ) << " address of parseResult is " << &parseResult << " and string representation is " << parseResult.toString();
+    sayhello();
     return result_code;
 }

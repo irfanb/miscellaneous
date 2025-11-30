@@ -12,6 +12,7 @@
 
 extern size_t lineNumber;
 #define MYLOG 	LOG(INFO) << "line " << lineNumber << ": "
+YYSTYPE parseResult;
 %}
  
 /* Declarations of terminals */
@@ -23,37 +24,54 @@ extern size_t lineNumber;
 
 exprs: /* empty */
      {
-       MYLOG << "found an empty thingy";
+       //MYLOG << "found an empty thingy";
+     /*
        mysemantictype s;
        s.setNull();
-     $$ = s;
+	     $$ = s;
+	     */
+	     mysemantictype mst;
+       mst.setEmptySequence();
+       $$ = mst;
+       //MYLOG << "$$ is " << $$.toString();
      }
      | exprs expr
        {
+       /*
        MYLOG << "exprs is " << $1.toString()
        << "expr is " << $2.toString();
-       auto j = std::vector< mysemantictype >();
-       j.push_back($1);
+       */
+       auto j = $1.getSequence();
        j.push_back($2);
        $$.setSequence( j );
+       //$$.setStringAtom( "plop" );
+       //MYLOG << "$$ is " << $$.toString();
+//LOG( INFO ) << " address of yylval is " << &yylval << " and string representation is " << yylval.toString();
+//LOG( INFO ) << " address of $$ is " << &$$ << " and string representation is " << $$.toString();
+parseResult = $$;
        }
        ;
 list: BEGINEXPRESSION exprs ENDEXPRESSION
     {
+    /*
        MYLOG << "$1 " << $1.toString()
-       <<  "$2 " << $2.toString()
+       <<  "$2 " << "(" << $2.toString() << ")"
        <<  "$3 " << $3.toString()
        ;
-       MYLOG << "("
-       <<  $3.toString()
-       << ")"
-       ;
-       $$ = $3;
+*/
+       $$.setList( $2.getSequence() );
+       //MYLOG << "$$ is " << $$.toString();
        }
     ;
 
 expr: atom
+    {
+      $$ = $1;
+    }
     | list
+    {
+      $$ = $1;
+      }
     ;
 
 atom: STRINGATOM 
