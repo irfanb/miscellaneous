@@ -3,6 +3,7 @@
 #include "ast.h"
 #include "lex.yy.h"
 #include "parser.tab.h"
+#include <iostream>
 
 // extern int yylex();
 extern int yyparse( void );
@@ -24,7 +25,7 @@ int main( int argc, char *argv[] ) {
     int result_code = yyparse();
     if ( fileOpened ) fclose( yyin );
     extern YYSTYPE parseResult;
-    LOG( INFO ) << " address of parseResult is " << &parseResult << " and string representation is " << parseResult.toString();
+    std::cout << " address of parseResult is " << &parseResult << " and string representation is " << parseResult.toString() <<std::endl;
     sayhello();
     return result_code;
 }
