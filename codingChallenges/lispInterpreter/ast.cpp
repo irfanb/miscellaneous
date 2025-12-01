@@ -26,5 +26,5 @@ const std::string IdentifierAtom::toString() const {
 
 SymbolAtom::SymbolAtom( const std::string &val ) : StringAtom( val ) {}
 const std::string SymbolAtom::toString() const {
-    return std::string( " " ) + std::string( ":" ) + m_value;
+    return std::string( " " ) + std::string( "" ) + m_value;
 }
