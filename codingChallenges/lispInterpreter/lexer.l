@@ -14,6 +14,7 @@ size_t lineNumber = 1;
 digit         [0-9]
 letter        [a-zA-Z]
 doublequote   ["]
+singlequote   [']
 colon   [:]
 lparen   [(]
 rparen   [)]
@@ -48,8 +49,12 @@ symbolatom {colon}{identifier}
 	}
 {number} {
 	yylval.setNumberAtom( std::string( yytext ) );
-	//printf("%ld: found number %d\n", lineNumber, yylval.num);
+	//printf("%ld: found number %d\n", linenumber, yylval.num);
 	return NUMBER;
+	}
+{singlequote} {
+	yylval.setOperator("'");
+	return SINGLEQUOTE;
 	}
 [+] {
 	//printf("%ld: found PLUS\n", lineNumber);
