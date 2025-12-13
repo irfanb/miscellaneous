@@ -2,7 +2,7 @@
 
 Operator::Operator( const std::string &value ) : m_value( value ) {}
 const std::string Operator::toString() const {
-    return std::string( "OperatorAtom " ) + m_value;
+    return std::string( " " ) + m_value;
 }
 
 Null::Null() {}
