@@ -71,6 +71,7 @@ expr: atom
     | SINGLEQUOTE list
     {
       $$ = $2;
+      $$.setIsQuoted();
       }
     | list
     {

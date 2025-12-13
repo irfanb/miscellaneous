@@ -62,12 +62,16 @@ typedef union {
 
 class mysemantictype {
     bool m_isList = false;
+    bool m_isQuoted { false };
 public:
     mysemantictype() {
 	    //LOG(INFO) <<("default constructor invoked");
     }
-    mysemantictype(const mysemantictype& copyMe) : m_isList( copyMe.m_isList ), m_value( copyMe.m_value ) {
+    mysemantictype(const mysemantictype& copyMe) : m_isList( copyMe.m_isList ), m_isQuoted( copyMe.m_isQuoted ), m_value( copyMe.m_value ) {
 	//LOG( INFO ) << "copy constructor invoked address of copyMe is " << &copyMe << " and string representation is " << copyMe.toString();
+    }
+    void setIsQuoted() {
+	    m_isQuoted = true;
     }
     using Sequence = std::vector<mysemantictype>;
     std::string toString() const {
@@ -77,18 +81,20 @@ public:
             if constexpr ( std::is_same_v<T, int> ) {
                 r = "";
             } else if constexpr ( std::is_same_v<T, NumberAtom> ) {
-                r = arg.toString();
+                if (m_isQuoted) r += "'";
+                r += arg.toString();
             } else if constexpr ( std::is_same_v<T, Null> ) {
-                r = arg.toString();
+                r += arg.toString();
             } else if constexpr ( std::is_same_v<T, IdentifierAtom> ) {
-                r = arg.toString();
+                r += arg.toString();
             } else if constexpr ( std::is_same_v<T, SymbolAtom> ) {
-                r = arg.toString();
+                r += arg.toString();
             } else if constexpr ( std::is_same_v<T, StringAtom> ) {
-                r = arg.toString();
+                r += arg.toString();
             } else if constexpr ( std::is_same_v<T, Operator> ) {
-                r = arg.toString();
+                r += arg.toString();
             } else if constexpr ( std::is_same_v<T, Sequence> ) {
+		    if (m_isQuoted) r += "'";
 		    if (m_isList) r+= "(";
                 for ( const auto &a : arg ) {
                     r += a.toString();
