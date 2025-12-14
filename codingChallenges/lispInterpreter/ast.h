@@ -109,6 +109,11 @@ public:
         std::visit( valueToString, m_value );
         return r;
     }
+    template <typename ExecuteVisitor> void execute(ExecuteVisitor& v) const {
+        std::string r;
+        std::visit( v, m_value );
+        return;
+    }
     const IdentifierAtom &getIdentifierAtom() const {
         return std::get<IdentifierAtom>( m_value );
     };

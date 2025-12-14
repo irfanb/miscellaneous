@@ -14,6 +14,40 @@ void yyerror( char const *message ) {
 }
 void sayhello();
 
+void execute(const mysemantictype& ast) {
+		std::string r;
+        const auto executeVisitor = [&r]( auto &&arg ) {
+            using T = std::decay_t<decltype( arg )>;
+            if constexpr ( std::is_same_v<T, int> ) {
+                r = "";
+            } else if constexpr ( std::is_same_v<T, NumberAtom> ) {
+                //if (arg.m_isQuoted) r += "'";
+                r += arg.toString();
+            } else if constexpr ( std::is_same_v<T, Null> ) {
+                r += arg.toString();
+            } else if constexpr ( std::is_same_v<T, IdentifierAtom> ) {
+                r += arg.toString();
+            } else if constexpr ( std::is_same_v<T, SymbolAtom> ) {
+                r += arg.toString();
+            } else if constexpr ( std::is_same_v<T, StringAtom> ) {
+                r += arg.toString();
+            } else if constexpr ( std::is_same_v<T, Operator> ) {
+                r += arg.toString();
+            } else if constexpr ( std::is_same_v<T, mysemantictype::Sequence> ) {
+		    //if (arg.m_isQuoted) r += "'";
+		    //if (arg.m_isList) r+= "(";
+                for ( const auto &a : arg ) {
+                    r += a.toString();
+                }
+		    //if (arg.m_isList) r+= ")";
+            } else {
+                r += "plop";
+            }
+        };
+	ast.execute( executeVisitor );
+	std::cout <<"execute says "<<r <<std::endl;
+}
+
 int main( int argc, char *argv[] ) {
 	bool fileOpened = true;
 	if (argc > 1) {
@@ -27,5 +61,6 @@ int main( int argc, char *argv[] ) {
     extern YYSTYPE parseResult;
     std::cout << " address of parseResult is " << &parseResult << " and string representation is " << parseResult.toString() <<std::endl;
     sayhello();
+    execute(parseResult);
     return result_code;
 }
