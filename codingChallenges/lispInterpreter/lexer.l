@@ -66,6 +66,30 @@ symbolatom {colon}{identifier}
 	yylval.setOperator("-");
 	return MINUS;
 	}
+[*] {
+	yylval.setOperator("*");
+	return TIMES;
+	}
+[/] {
+	yylval.setOperator("/");
+	return DIVIDE;
+	}
+[<=] {
+	yylval.setOperator("<=");
+	return LEQ;
+	}
+[=>] {
+	yylval.setOperator("=>");
+	return GEQ;
+	}
+[<] {
+	yylval.setOperator("<");
+	return LESSTHAN;
+	}
+[>] {
+	yylval.setOperator(">");
+	return GREATERTHAN;
+	}
 [\n] {
 	++lineNumber;
 	}
