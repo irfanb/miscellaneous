@@ -1,0 +1,4 @@
+ ( + 1 2)
+ ( * 2 3)
+ ( defun doublen( n)( * 2 n))
+ ( doublen 4)
